@@ -12,6 +12,9 @@ const GlobalStyle = createGlobalStyle`
     background-color: black;
     color: whitesmoke
   }
+  a {
+    text-decoration: none;
+  }
 `;
 
 const root = ReactDOM.createRoot(
