@@ -7,7 +7,8 @@ import ReactDOM from "react-dom/client";
 const GlobalStyle = createGlobalStyle`
   ${reset}
   body {
-    background-color: #121212;
+    background-color: black;
+    color: whitesmoke
   }
 `;
 
