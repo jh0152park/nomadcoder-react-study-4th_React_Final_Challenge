@@ -1,7 +1,15 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 function Home() {
-    return <h1>HOME</h1>;
+    return (
+        <>
+            <Helmet>
+                <title>쿠팡플레이 - 와우회원은 무료!</title>
+            </Helmet>
+            <h1>HOME</h1>
+        </>
+    );
 }
 
 export default React.memo(Home);
