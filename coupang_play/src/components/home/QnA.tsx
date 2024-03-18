@@ -7,10 +7,8 @@ import {
     Box,
     Text,
     VStack,
-    border,
 } from "@chakra-ui/react";
 
-// w 800px
 export default function QnA() {
     return (
         <VStack
