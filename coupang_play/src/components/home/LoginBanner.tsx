@@ -10,15 +10,6 @@ export default function LoginBanner() {
             display="flex"
             justifyContent="flex-end"
         >
-            <Box
-                w="100%"
-                h="120px"
-                position="absolute"
-                bg="linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1))"
-                top={0}
-                zIndex={99}
-            />
-
             <Image
                 h="100%"
                 src="/resources/images/home/banner1.jpg"
