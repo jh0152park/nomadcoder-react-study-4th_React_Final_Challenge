@@ -6,7 +6,7 @@ export default function AdBanner1() {
             w="100%"
             h="585px"
             pr="30px"
-            bg="linear-gradient(to bottom, rgb(9, 10, 19), rgb(11, 33, 74))"
+            bg="linear-gradient(to bottom, rgb(9, 10, 19), rgb(11, 40, 74))"
             spacing="0"
             alignItems="center"
             justifyContent="center"
