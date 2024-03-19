@@ -1,6 +1,7 @@
-import type { UseFormRegisterReturn } from "react-hook-form";
-import { Icon, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { IconType } from "react-icons";
+import { Icon, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+
+import type { UseFormRegisterReturn } from "react-hook-form";
 
 interface IProps {
     icon: IconType;
