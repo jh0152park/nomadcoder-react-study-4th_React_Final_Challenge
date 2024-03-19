@@ -48,11 +48,11 @@ export default function LoginModal({ isOpen, onClose }: IModalProps) {
                 title: `${result.name}님 환영합니다`,
             });
 
-            setIsUserLogin(false);
+            setIsUserLogin(true);
             setUserName(result.name);
 
             modalClose();
-            navigate("/home");
+            navigate("/home/movies");
         },
         onError: (result: any) => {
             console.log("login error");

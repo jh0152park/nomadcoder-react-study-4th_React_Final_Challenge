@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import { Helmet } from "react-helmet";
 
-function Home() {
+function Movies() {
     return (
         <>
             <Helmet>
@@ -13,4 +13,4 @@ function Home() {
     );
 }
 
-export default React.memo(Home);
+export default React.memo(Movies);

@@ -22,7 +22,7 @@ export default function SNS() {
                 >
                     <Image
                         w="100%"
-                        src={`resources/images/footer/social-${_sns}.png`}
+                        src={`/resources/images/footer/social-${_sns}.png`}
                     />
                 </Box>
             ))}
