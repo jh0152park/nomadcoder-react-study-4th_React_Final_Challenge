@@ -54,7 +54,8 @@ export default function LoginBanner() {
                 </VStack>
                 <VStack alignItems="flex-start">
                     <LoginButton
-                        title="첫 달 무료로 시작하기"
+                        action="register"
+                        title="노마드 회원 첫달 무료로 시작하기"
                         border="none"
                         bgColor="linear-gradient(45deg, rgb(19, 90, 255), rgb(91, 173, 255))"
                     />
@@ -62,7 +63,8 @@ export default function LoginBanner() {
                         이미 노마드 리액트 스터디 회원이라면?
                     </Text>
                     <LoginButton
-                        title="와우회원 로그인"
+                        action="login"
+                        title="노마드회원 로그인"
                         border="1px solid white"
                         bgColor="black"
                     />
