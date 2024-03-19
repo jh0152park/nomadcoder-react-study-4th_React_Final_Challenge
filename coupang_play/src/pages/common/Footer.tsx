@@ -8,7 +8,7 @@ export default function Footer() {
         <HStack w="100%" h="250px" px="270px" alignItems="flex-start" pt="20px">
             <Image
                 w="220px"
-                src="resources/images/common/logo.webp"
+                src="/resources/images/common/logo.webp"
                 objectFit="cover"
             />
             <Information />
