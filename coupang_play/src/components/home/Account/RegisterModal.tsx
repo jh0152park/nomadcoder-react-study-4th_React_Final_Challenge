@@ -7,12 +7,18 @@ import {
     ModalOverlay,
     Text,
     VStack,
+    useToast,
 } from "@chakra-ui/react";
-import { MdOutlineEmail } from "react-icons/md";
+
+import { useMutation } from "react-query";
 import { FaRegUser } from "react-icons/fa6";
+import { MdOutlineEmail } from "react-icons/md";
+import { FieldValues, useForm } from "react-hook-form";
+
 import UserInput from "./UserInput";
-import { useForm } from "react-hook-form";
 import ModalButton from "./ModalButton";
+
+import { IUserHandlerResponse, UserHandlerAPI } from "../../../global/api";
 
 export interface IModalProps {
     isOpen: boolean;
@@ -25,16 +31,46 @@ export interface IUserInputFormProps {
 }
 
 export default function RegisterModal({ isOpen, onClose }: IModalProps) {
+    const toast = useToast();
+    const apiHandler = new UserHandlerAPI();
     const { register, handleSubmit, reset } = useForm<IUserInputFormProps>();
 
-    function onRegisterButtonClick() {
-        alert("Sumbit");
+    const mutation = useMutation(apiHandler.register, {
+        onMutate: () => {
+            // console.log(`start to register account.`);
+        },
+        onSuccess: (result: IUserHandlerResponse) => {
+            // console.log("register mutation success");
+            // console.log(result);
+            toast({
+                status: "success",
+                title: `${result.name}님 환영합니다`,
+            });
+        },
+        onError: (result: any) => {
+            console.log("register error");
+            console.log(result);
+            toast({
+                status: "error",
+                title: "잠시 후 다시 시도해주세요",
+            });
+        },
+    });
+
+    function onRegisterButtonClick({ email, name }: FieldValues) {
+        reset();
+        mutation.mutate({ email, name });
+    }
+
+    function modalClose() {
+        reset();
+        onClose();
     }
 
     return (
         <Modal
             isOpen={isOpen}
-            onClose={onClose}
+            onClose={modalClose}
             isCentered
             motionPreset="slideInBottom"
             size="xl"
@@ -79,6 +115,7 @@ export default function RegisterModal({ isOpen, onClose }: IModalProps) {
                             border="none"
                             title="노팡플레이 회원가입하기"
                             type="submit"
+                            loading={mutation.isLoading}
                         />
 
                         <ModalButton
