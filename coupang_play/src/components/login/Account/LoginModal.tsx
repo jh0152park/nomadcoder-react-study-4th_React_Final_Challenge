@@ -23,11 +23,18 @@ import {
     IUserInputFormProps,
     UserHandlerAPI,
 } from "../../../global/api";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { IS_USER_LOGIN, USER_NAME } from "../../../global/projectCommon";
 
 export default function LoginModal({ isOpen, onClose }: IModalProps) {
     const toast = useToast();
+    const navigate = useNavigate();
     const apiHandler = new UserHandlerAPI();
     const { register, handleSubmit, reset } = useForm<IUserInputFormProps>();
+
+    const setUserName = useSetRecoilState(USER_NAME);
+    const setIsUserLogin = useSetRecoilState(IS_USER_LOGIN);
 
     const mutation = useMutation(apiHandler.login, {
         onMutate: () => {
@@ -40,7 +47,12 @@ export default function LoginModal({ isOpen, onClose }: IModalProps) {
                 status: "success",
                 title: `${result.name}님 환영합니다`,
             });
+
+            setIsUserLogin(false);
+            setUserName(result.name);
+
             modalClose();
+            navigate("/home");
         },
         onError: (result: any) => {
             console.log("login error");
