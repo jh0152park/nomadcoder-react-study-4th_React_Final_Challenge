@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 
 import { useMutation } from "react-query";
-import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
 import { FieldValues, useForm } from "react-hook-form";
 
@@ -25,38 +24,37 @@ import {
     UserHandlerAPI,
 } from "../../../global/api";
 
-export default function RegisterModal({ isOpen, onClose }: IModalProps) {
+export default function LoginModal({ isOpen, onClose }: IModalProps) {
     const toast = useToast();
     const apiHandler = new UserHandlerAPI();
     const { register, handleSubmit, reset } = useForm<IUserInputFormProps>();
 
-    const mutation = useMutation(apiHandler.register, {
+    const mutation = useMutation(apiHandler.login, {
         onMutate: () => {
-            // console.log(`start to register account.`);
+            console.log(`start to login.`);
         },
         onSuccess: (result: IUserHandlerResponse) => {
-            // console.log("register mutation success");
-            // console.log(result);
+            console.log("login mutation success");
+            console.log(result);
             toast({
                 status: "success",
-                title: `회원가입 완료`,
-                description: "로그인 후 이용해주세요",
+                title: `${result.name}님 환영합니다`,
             });
             modalClose();
         },
         onError: (result: any) => {
-            console.log("register error");
+            console.log("login error");
             console.log(result);
             toast({
                 status: "error",
-                title: "잠시 후 다시 시도해주세요",
+                title: "이메일을 확인해 주세요",
             });
         },
     });
 
-    function onRegisterButtonClick({ email, name }: FieldValues) {
+    function onLoginButtonClick({ email }: FieldValues) {
         reset();
-        mutation.mutate({ email, name });
+        mutation.mutate({ email });
     }
 
     function modalClose() {
@@ -75,7 +73,7 @@ export default function RegisterModal({ isOpen, onClose }: IModalProps) {
             <ModalOverlay />
             <ModalContent bg="black" w="100%">
                 <ModalHeader fontWeight="bold" fontSize="25px">
-                    노팡 회원가입
+                    노팡 로그인
                 </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
@@ -84,7 +82,7 @@ export default function RegisterModal({ isOpen, onClose }: IModalProps) {
                         alignItems="center"
                         mb="30px"
                         as="form"
-                        onSubmit={handleSubmit(onRegisterButtonClick)}
+                        onSubmit={handleSubmit(onLoginButtonClick)}
                     >
                         <Text fontWeight="bold" fontSize="30px" mb="30px">
                             noupang
@@ -97,20 +95,13 @@ export default function RegisterModal({ isOpen, onClose }: IModalProps) {
                             register={register("email", { required: true })}
                         />
 
-                        <UserInput
-                            icon={FaRegUser}
-                            placeholder="이름 입력"
-                            type="text"
-                            register={register("name", { required: true })}
-                        />
-
                         <ModalButton
                             color="white"
                             hoverColor="white"
                             bg="blue.500"
                             hoverBg="blue.400"
                             border="none"
-                            title="노팡플레이 회원가입하기"
+                            title="노팡플레이 로그인하기"
                             type="submit"
                             loading={mutation.isLoading}
                         />
