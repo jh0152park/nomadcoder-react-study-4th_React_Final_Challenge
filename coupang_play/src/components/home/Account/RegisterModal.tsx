@@ -45,7 +45,10 @@ export default function RegisterModal({ isOpen, onClose }: IModalProps) {
             toast({
                 status: "success",
                 title: `${result.name}님 환영합니다`,
+                description: "로그인 후 이용해주세요",
             });
+            modalClose();
+            // have to user information save
         },
         onError: (result: any) => {
             console.log("register error");
