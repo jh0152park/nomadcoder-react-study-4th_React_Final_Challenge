@@ -2,7 +2,7 @@ import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist({
-    key: "persist-atom-key",
+    key: "jh0152_coupangplayer_atom_key",
     storage: localStorage,
 });
 
