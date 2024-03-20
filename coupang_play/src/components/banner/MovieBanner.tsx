@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { AnimatePresence, useScroll } from "framer-motion";
 import { useSuspenseQueries } from "@tanstack/react-query";
@@ -64,13 +64,10 @@ function MovieBanner({ movieResults }: IBannerProps) {
     function onRightClick() {
         if (moving) return;
 
-        if (nextIndex === movieResults.length) {
-            setCurretIndex(0);
-            setNextIndex(1);
-        } else {
-            setCurretIndex((prev) => prev + 1);
-            setNextIndex((prev) => prev + 1);
-        }
+        setCurretIndex((prev) =>
+            prev === movieResults.length - 1 ? 0 : prev + 1
+        );
+        setNextIndex((prev) => (prev === movieResults.length ? 1 : prev + 1));
 
         setMoving(true);
         setDirection(1);
@@ -106,6 +103,12 @@ function MovieBanner({ movieResults }: IBannerProps) {
 
     console.log(detailDatas);
     console.log(movieResults);
+
+    useEffect(() => {
+        const id = setInterval(onRightClick, 10 * 1000);
+
+        return () => clearInterval(id);
+    }, []);
 
     return (
         <Box w="100%" h="685px" position="relative">
@@ -160,6 +163,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
                     <Box
                         w="8px"
                         h="8px"
+                        key={i}
                         borderRadius="50%"
                         bg={
                             currentIndex === i
