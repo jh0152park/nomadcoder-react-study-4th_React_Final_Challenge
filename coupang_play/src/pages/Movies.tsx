@@ -1,8 +1,13 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import { Helmet } from "react-helmet";
+import { useOutletContext } from "react-router-dom";
 
 function Movies() {
+    const entireDatas = useOutletContext();
+
+    console.log(entireDatas);
+
     return (
         <>
             <Helmet>
