@@ -36,3 +36,15 @@ export const CURRENT_CATEGORY = atom({
 
 export let CATEGORIES: string[] = [];
 CATEGORIES_LINK.forEach((value, key) => CATEGORIES.push(key));
+
+export const SlideVariants = {
+    start: (direction: number) => ({
+        x: (window.outerWidth + 5) * direction,
+    }),
+    end: {
+        x: 0,
+    },
+    exit: (direction: number) => ({
+        x: (-window.outerWidth - 5) * direction,
+    }),
+};
