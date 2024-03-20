@@ -1,3 +1,4 @@
+// .**eslintignore**
 import axios from "axios";
 import { QueryFunctionContext } from "react-query";
 
