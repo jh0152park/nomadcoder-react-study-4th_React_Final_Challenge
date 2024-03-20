@@ -30,3 +30,43 @@ export const MainBannerImageVariants = {
         x: -window.outerWidth * direction - 5,
     }),
 };
+
+export const PlayButton = styled(motion.div)`
+    width: 300px;
+    height: 65px;
+    border-radius: 5px;
+    background-color: rgb(18, 148, 244);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgb(11, 88, 163);
+        transition: all 0.1s linear;
+    }
+`;
+
+export const Overlay = styled(motion.div)`
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.7);
+`;
+
+export const BannerDetail = styled(motion.div)`
+    width: 700px;
+    height: 600px;
+    background-color: #171717;
+    border-radius: 10px;
+    position: absolute;
+    box-sizing: border-box;
+`;

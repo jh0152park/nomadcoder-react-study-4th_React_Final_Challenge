@@ -1,22 +1,30 @@
 import { useState } from "react";
 import { FaPlay } from "react-icons/fa";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, useScroll } from "framer-motion";
 import { useSuspenseQueries } from "@tanstack/react-query";
-import { Box, Center, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import { Box, HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { imagePathGenerator } from "../../utils";
 import { MovieHandlerAPI } from "../../global/api";
-import { MainBannerImageVariants, MainImageBox } from "./style";
+import {
+    BannerDetail,
+    MainBannerImageVariants,
+    MainImageBox,
+    Overlay,
+    PlayButton,
+} from "./style";
 import { IMovieDetailsResponse, IMovieResult } from "../../global/apiResponse";
 
 import Summary from "./Summary";
+import React from "react";
 
 interface IBannerProps {
     movieResults: IMovieResult[];
 }
 
-export default function MovieBanner({ movieResults }: IBannerProps) {
+function MovieBanner({ movieResults }: IBannerProps) {
+    const { scrollY } = useScroll();
     const movieAPI = new MovieHandlerAPI();
 
     const [nextIndex, setNextIndex] = useState(1);
@@ -24,6 +32,8 @@ export default function MovieBanner({ movieResults }: IBannerProps) {
 
     const [moving, setMoving] = useState(false);
     const [direction, setDirection] = useState(1);
+
+    const [playButton, setPlayButton] = useState(false);
 
     const details = useSuspenseQueries({
         queries: movieResults!.map((data) => ({
@@ -64,6 +74,16 @@ export default function MovieBanner({ movieResults }: IBannerProps) {
 
         setMoving(true);
         setDirection(1);
+    }
+
+    function modalOpen() {
+        setPlayButton(true);
+        document.body.style.overflow = "hidden";
+    }
+
+    function modalClose() {
+        setPlayButton(false);
+        document.body.style.overflow = "unset";
     }
 
     console.log(detailDatas);
@@ -152,16 +172,9 @@ export default function MovieBanner({ movieResults }: IBannerProps) {
                                     "영화"
                                 }
                             />
-                            <Center
-                                w="300px"
-                                h="65px"
-                                bg="rgb(18, 148, 244)"
-                                borderRadius="5px"
-                                _hover={{
-                                    cursor: "pointer",
-                                    bg: "rgb(11, 88, 163)",
-                                }}
-                                transition="all 0.1s linear"
+                            <PlayButton
+                                layoutId={`mainMovie_${data.id}`}
+                                onClick={modalOpen}
                             >
                                 <HStack>
                                     <Icon
@@ -174,11 +187,29 @@ export default function MovieBanner({ movieResults }: IBannerProps) {
                                         재생하기
                                     </Text>
                                 </HStack>
-                            </Center>
+                            </PlayButton>
                         </VStack>
+
+                        {playButton && (
+                            <AnimatePresence>
+                                <Overlay onClick={modalClose}>
+                                    <BannerDetail
+                                        style={{
+                                            top: scrollY.get() + 200,
+                                        }}
+                                        layoutId={`mainMovie_${data.id}`}
+                                        transition={{
+                                            type: "tween",
+                                        }}
+                                    ></BannerDetail>
+                                </Overlay>
+                            </AnimatePresence>
+                        )}
                     </MainImageBox>
                 ))}
             </AnimatePresence>
         </Box>
     );
 }
+
+export default React.memo(MovieBanner);
