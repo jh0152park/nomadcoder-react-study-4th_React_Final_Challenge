@@ -20,7 +20,11 @@ import ModalButton from "./ModalButton";
 import { UserHandlerAPI } from "../../../global/api";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { IS_USER_LOGIN, USER_NAME } from "../../../global/projectCommon";
+import {
+    CURRENT_CATEGORY,
+    IS_USER_LOGIN,
+    USER_NAME,
+} from "../../../global/projectCommon";
 import { IUserHandlerResponse } from "../../../global/apiResponse";
 
 export interface IModalProps {
@@ -41,6 +45,7 @@ export default function LoginModal({ isOpen, onClose }: IModalProps) {
 
     const setUserName = useSetRecoilState(USER_NAME);
     const setIsUserLogin = useSetRecoilState(IS_USER_LOGIN);
+    const setCurrentCategory = useSetRecoilState(CURRENT_CATEGORY);
 
     const mutation = useMutation({
         mutationFn: apiHandler.login,
@@ -57,6 +62,7 @@ export default function LoginModal({ isOpen, onClose }: IModalProps) {
 
             setIsUserLogin(true);
             setUserName(result.name);
+            setCurrentCategory("영화");
 
             modalClose();
             navigate("/home/movies");
