@@ -90,7 +90,7 @@ export default function Header() {
                                 ? MdOutlineKeyboardArrowUp
                                 : MdOutlineKeyboardArrowDown
                         }
-                        mr="30px"
+                        mr="5px"
                         _hover={{ cursor: "pointer" }}
                     />
                 </HStack>
