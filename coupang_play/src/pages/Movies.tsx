@@ -5,6 +5,7 @@ import { useOutletContext } from "react-router-dom";
 import MainSkeleton from "../components/home/skeleton/MainSkeleton";
 import { IEntireDatas } from "./HomeLayout";
 import MovieBanner from "../components/banner/MovieBanner";
+import GenreCategories from "../components/genre/GenreCategories";
 
 function Movies() {
     const entireDatas = useOutletContext<IEntireDatas>();
@@ -21,6 +22,7 @@ function Movies() {
             <Suspense fallback={<MainSkeleton />}>
                 <MovieBanner movieResults={entireDatas?.mNowPlaying} />
             </Suspense>
+            <GenreCategories category="movie" />
             <Box w="100%" h="200vh" />
         </>
     );
