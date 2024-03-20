@@ -18,12 +18,9 @@ import { FieldValues, useForm } from "react-hook-form";
 import UserInput from "./UserInput";
 import ModalButton from "./ModalButton";
 
-import {
-    IModalProps,
-    IUserHandlerResponse,
-    IUserInputFormProps,
-    UserHandlerAPI,
-} from "../../../global/api";
+import { UserHandlerAPI } from "../../../global/api";
+import { IModalProps, IUserInputFormProps } from "./LoginModal";
+import { IUserHandlerResponse } from "../../../global/apiResponse";
 
 export default function RegisterModal({ isOpen, onClose }: IModalProps) {
     const toast = useToast();
