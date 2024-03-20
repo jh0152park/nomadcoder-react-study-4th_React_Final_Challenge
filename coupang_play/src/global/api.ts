@@ -1,4 +1,3 @@
-// .**eslintignore**
 import axios from "axios";
 import { QueryFunctionContext } from "react-query";
 
@@ -29,6 +28,7 @@ export class UserHandlerAPI {
     }
 }
 
+/* eslint-disable */
 export class MovieHandlerAPI {
     public async nowPlaying({ queryKey }: QueryFunctionContext) {
         const [_, page] = queryKey;
