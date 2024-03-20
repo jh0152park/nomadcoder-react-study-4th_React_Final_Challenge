@@ -17,15 +17,21 @@ import { FieldValues, useForm } from "react-hook-form";
 import UserInput from "./UserInput";
 import ModalButton from "./ModalButton";
 
-import {
-    IModalProps,
-    IUserHandlerResponse,
-    IUserInputFormProps,
-    UserHandlerAPI,
-} from "../../../global/api";
+import { UserHandlerAPI } from "../../../global/api";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { IS_USER_LOGIN, USER_NAME } from "../../../global/projectCommon";
+import { IUserHandlerResponse } from "../../../global/apiResponse";
+
+export interface IModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export interface IUserInputFormProps {
+    name: string;
+    email: string;
+}
 
 export default function LoginModal({ isOpen, onClose }: IModalProps) {
     const toast = useToast();
