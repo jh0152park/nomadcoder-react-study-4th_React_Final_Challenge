@@ -24,7 +24,7 @@ export interface IUserHandlerResponse {
  *************************
  */
 
-interface IMovieResult {
+export interface IMovieResult {
     adult: boolean;
     backdrop_path: string;
     genre_ids: number[];
@@ -122,7 +122,7 @@ export interface IMovieDetailsResponse {
     backdrop_path: string;
     belongs_to_collection: IBelongsToCollection;
     budget: number;
-    genres: IGenresDetail;
+    genres: IGenresDetail[];
     homepage: string;
     id: number;
     imdb_id: string;
@@ -166,7 +166,7 @@ export interface IMovieVideosResponse {
  ***************************
  */
 
-interface ITVResult {
+export interface ITVResult {
     adult: boolean;
     backdrop_path: string;
     genre_ids: number[];

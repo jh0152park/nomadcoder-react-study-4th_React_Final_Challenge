@@ -28,7 +28,7 @@ export default function CategoryButton({ category, url }: IProps) {
             borderBottom={
                 currentCategory === category
                     ? "2px solid white"
-                    : "2px solid black"
+                    : "2px solid rgba(0,0,0,0)"
             }
             onClick={onCategoryClick}
             _hover={{

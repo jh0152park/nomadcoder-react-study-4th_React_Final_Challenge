@@ -8,15 +8,35 @@ import Login from "./Login";
 import { useEffect } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { MovieHandlerAPI, TVHandlerAPI } from "../global/api";
-import { IMovieListsResponse } from "../global/apiResponse";
+import { IMovieListsResponse, ITVListsResponse } from "../global/apiResponse";
+import { IMovieResult, ITVResult } from "../global/apiResponse";
+
+export interface IEntireDatas {
+    mNowPlaying: IMovieResult[];
+    mPopular: IMovieResult[];
+    mTopRated: IMovieResult[];
+    mUpComming: IMovieResult[];
+    mExtra1: IMovieResult[];
+    mExtra2: IMovieResult[];
+    mExtra3: IMovieResult[];
+    mExtra4: IMovieResult[];
+    tAiringToday: ITVResult[];
+    tOnTheAir: ITVResult[];
+    tPopular: ITVResult[];
+    tTopRated: ITVResult[];
+    tExtra1: ITVResult[];
+    tExtra2: ITVResult[];
+    tExtra3: ITVResult[];
+    tExtra4: ITVResult[];
+}
 
 export default function HomeLayout() {
     const toast = useToast();
     const navigate = useNavigate();
     const isUserLogin = useRecoilValue(IS_USER_LOGIN);
 
-    const movieAPI = new MovieHandlerAPI();
     const tvAPI = new TVHandlerAPI();
+    const movieAPI = new MovieHandlerAPI();
 
     // entire movies call
     const mNowPlaying = useSuspenseQuery<IMovieListsResponse>({
@@ -53,35 +73,35 @@ export default function HomeLayout() {
     });
 
     // entire tvs call
-    const tAiringToday = useSuspenseQuery<IMovieListsResponse>({
+    const tAiringToday = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tAiringToday", 1],
         queryFn: tvAPI.airingToday,
     });
-    const tOnTheAir = useSuspenseQuery<IMovieListsResponse>({
+    const tOnTheAir = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tOnTheAir", 1],
         queryFn: tvAPI.onTheAir,
     });
-    const tPopular = useSuspenseQuery<IMovieListsResponse>({
+    const tPopular = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tPopular", 1],
         queryFn: tvAPI.popular,
     });
-    const tTopRated = useSuspenseQuery<IMovieListsResponse>({
+    const tTopRated = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tTopRated", 1],
         queryFn: tvAPI.topRated,
     });
-    const tExtra1 = useSuspenseQuery<IMovieListsResponse>({
+    const tExtra1 = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tExtra1", 3],
         queryFn: tvAPI.popular,
     });
-    const tExtra2 = useSuspenseQuery<IMovieListsResponse>({
+    const tExtra2 = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tExtra2", 4],
         queryFn: tvAPI.popular,
     });
-    const tExtra3 = useSuspenseQuery<IMovieListsResponse>({
+    const tExtra3 = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tExtra3", 3],
         queryFn: tvAPI.topRated,
     });
-    const tExtra4 = useSuspenseQuery<IMovieListsResponse>({
+    const tExtra4 = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tExtra4", 4],
         queryFn: tvAPI.topRated,
     });

@@ -33,6 +33,7 @@ export class UserHandlerAPI {
 export class MovieHandlerAPI {
     public async nowPlaying({ queryKey }: QueryFunctionContext) {
         const [_, page] = queryKey;
+
         const options = {
             method: "GET",
             headers: {
