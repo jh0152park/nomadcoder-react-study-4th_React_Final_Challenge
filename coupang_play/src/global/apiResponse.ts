@@ -1,5 +1,5 @@
 export interface IUserHandlerResponse {
     name: string;
     email: string;
-    issuccess: boolean;
+    isSuccess: boolean;
 }
