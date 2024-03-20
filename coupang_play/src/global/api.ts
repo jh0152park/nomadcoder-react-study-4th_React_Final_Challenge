@@ -82,7 +82,7 @@ export class MovieHandlerAPI {
         ).then((response) => response.json());
     }
 
-    public async upcomming({ queryKey }: QueryFunctionContext) {
+    public async upComming({ queryKey }: QueryFunctionContext) {
         const [_, page] = queryKey;
         const options = {
             method: "GET",

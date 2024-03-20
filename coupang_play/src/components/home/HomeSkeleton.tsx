@@ -8,11 +8,11 @@ export default function HomeSkeleton() {
     const numOfCategories = Math.ceil(screenWidth / 100) - 3;
 
     return (
-        <VStack alignItems="center">
+        <VStack alignItems="center" zIndex={0}>
             <MainSkeleton />
             <HStack>
-                {[...new Array(numOfCategories)].map((s) => (
-                    <CategorySkeleton key={s} />
+                {[...new Array(numOfCategories)].map((s, i) => (
+                    <CategorySkeleton key={i} />
                 ))}
             </HStack>
             <Grid
@@ -21,8 +21,8 @@ export default function HomeSkeleton() {
                 gap="20px"
                 mt="40px"
             >
-                {[...new Array(18)].map((s) => (
-                    <VideoSkeleton key={s} />
+                {[...new Array(18)].map((s, i) => (
+                    <VideoSkeleton key={i} />
                 ))}
             </Grid>
         </VStack>
