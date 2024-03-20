@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import HomeLayout from "./pages/HomeLayout";
 import { Suspense } from "react";
 import Movies from "./pages/Movies";
+import HomeSkeleton from "./components/home/HomeSkeleton";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     {
         path: "/home",
         element: (
-            <Suspense fallback={<h1>Loading~.~</h1>}>
+            <Suspense fallback={<HomeSkeleton />}>
                 <HomeLayout />
             </Suspense>
         ),

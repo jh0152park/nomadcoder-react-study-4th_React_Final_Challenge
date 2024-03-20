@@ -10,7 +10,7 @@ import {
     useToast,
 } from "@chakra-ui/react";
 
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
 import { FieldValues, useForm } from "react-hook-form";
@@ -27,7 +27,8 @@ export default function RegisterModal({ isOpen, onClose }: IModalProps) {
     const apiHandler = new UserHandlerAPI();
     const { register, handleSubmit, reset } = useForm<IUserInputFormProps>();
 
-    const mutation = useMutation(apiHandler.register, {
+    const mutation = useMutation({
+        mutationFn: apiHandler.register,
         onMutate: () => {
             // console.log(`start to register account.`);
         },
@@ -109,7 +110,7 @@ export default function RegisterModal({ isOpen, onClose }: IModalProps) {
                             border="none"
                             title="노팡플레이 회원가입하기"
                             type="submit"
-                            loading={mutation.isLoading}
+                            loading={mutation.isPending}
                         />
 
                         <ModalButton

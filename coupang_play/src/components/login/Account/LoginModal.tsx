@@ -10,8 +10,8 @@ import {
     useToast,
 } from "@chakra-ui/react";
 
-import { useMutation } from "react-query";
 import { MdOutlineEmail } from "react-icons/md";
+import { useMutation } from "@tanstack/react-query";
 import { FieldValues, useForm } from "react-hook-form";
 
 import UserInput from "./UserInput";
@@ -42,7 +42,8 @@ export default function LoginModal({ isOpen, onClose }: IModalProps) {
     const setUserName = useSetRecoilState(USER_NAME);
     const setIsUserLogin = useSetRecoilState(IS_USER_LOGIN);
 
-    const mutation = useMutation(apiHandler.login, {
+    const mutation = useMutation({
+        mutationFn: apiHandler.login,
         onMutate: () => {
             console.log(`start to login.`);
         },
@@ -121,7 +122,7 @@ export default function LoginModal({ isOpen, onClose }: IModalProps) {
                             border="none"
                             title="노팡플레이 로그인하기"
                             type="submit"
-                            loading={mutation.isLoading}
+                            loading={mutation.isPending}
                         />
 
                         <ModalButton

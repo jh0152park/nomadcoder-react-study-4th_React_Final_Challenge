@@ -1,5 +1,6 @@
 import axios from "axios";
-import { QueryFunctionContext } from "react-query";
+import { QueryFunctionContext } from "@tanstack/react-query";
+import { IUserHandlerResponse } from "./apiResponse";
 
 interface IRegisterProps {
     email: string;
