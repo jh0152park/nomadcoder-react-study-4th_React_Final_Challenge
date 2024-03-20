@@ -76,6 +76,24 @@ function MovieBanner({ movieResults }: IBannerProps) {
         setDirection(1);
     }
 
+    function onDotClick(index: number) {
+        if (moving) return;
+        if (index === currentIndex) return;
+
+        setCurretIndex(index);
+        setNextIndex(index + 1);
+
+        if (index > currentIndex) {
+            // right
+            setMoving(true);
+            setDirection(1);
+        } else {
+            // left
+            setMoving(true);
+            setDirection(-1);
+        }
+    }
+
     function modalOpen() {
         setPlayButton(true);
         document.body.style.overflow = "hidden";
@@ -127,6 +145,32 @@ function MovieBanner({ movieResults }: IBannerProps) {
                 transition="all 0.1s linear"
                 onClick={onRightClick}
             />
+
+            <HStack
+                w="100%"
+                h="50px"
+                position="absolute"
+                zIndex="99"
+                bottom="0"
+                justifyContent="center"
+                alignItems="center"
+                spacing="20px"
+            >
+                {[...new Array(movieResults.length)].map((dot, i) => (
+                    <Box
+                        w="8px"
+                        h="8px"
+                        borderRadius="50%"
+                        bg={
+                            currentIndex === i
+                                ? "whitesmoke"
+                                : "rgb(57, 57, 57)"
+                        }
+                        _hover={{ cursor: "pointer" }}
+                        onClick={() => onDotClick(i)}
+                    />
+                ))}
+            </HStack>
 
             <AnimatePresence
                 initial={false}
