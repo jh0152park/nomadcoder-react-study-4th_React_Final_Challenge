@@ -12,6 +12,7 @@ export default function HomeLayout() {
     const navigate = useNavigate();
     const isUserLogin = useRecoilValue(IS_USER_LOGIN);
 
+    /* eslint-disable */
     useEffect(() => {
         if (!isUserLogin) {
             toast({
