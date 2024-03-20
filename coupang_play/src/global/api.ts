@@ -1,6 +1,6 @@
 // .**eslintignore**
 import axios from "axios";
-import { QueryFunctionContext } from "react-query";
+// import { QueryFunctionContext } from "react-query";
 
 interface IRegisterProps {
     email: string;
