@@ -8,6 +8,7 @@ import Movies from "./pages/Movies";
 import HomeSkeleton from "./components/home/HomeSkeleton";
 import NotSupport from "./pages/NotSuppot";
 import Detail from "./pages/Detail";
+import Tvs from "./pages/Tvs";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: "movies/:title",
                 element: <Detail />,
+            },
+            {
+                path: "tv",
+                element: <Tvs />,
             },
             {
                 path: "live",
