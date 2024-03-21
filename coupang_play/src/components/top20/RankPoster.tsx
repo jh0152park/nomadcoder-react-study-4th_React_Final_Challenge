@@ -1,4 +1,6 @@
 import { Box, Center, HStack, Image } from "@chakra-ui/react";
+import MonopolyBadge from "./MonoplyBadge";
+import NewestBadge from "./NewestBadge";
 
 interface IProps {
     rank: number;
@@ -41,40 +43,8 @@ export default function RankPoster({ rank, poster, newest, monopoly }: IProps) {
                 borderRadius="5px"
                 position="relative"
             >
-                {monopoly && (
-                    <Center
-                        w="60px"
-                        h="30px"
-                        fontSize="13px"
-                        bgColor="black"
-                        border="1px solid gray"
-                        position="absolute"
-                        top="5px"
-                        left="5px"
-                        borderRadius="5px"
-                        fontWeight="bold"
-                    >
-                        <span style={{ color: "rgb(45, 184, 255)" }}>쿠플</span>
-                        <span style={{ color: "white" }}>|</span>
-                        <span style={{ color: "white" }}>독점</span>
-                    </Center>
-                )}
-                {newest && (
-                    <Center
-                        w="35px"
-                        h="30px"
-                        fontSize="13px"
-                        bgColor="black"
-                        border="1px solid gray"
-                        position="absolute"
-                        top="5px"
-                        left="5px"
-                        borderRadius="5px"
-                        fontWeight="bold"
-                    >
-                        <span style={{ color: "rgb(45, 184, 255)" }}>신규</span>
-                    </Center>
-                )}
+                {monopoly && <MonopolyBadge />}
+                {newest && <NewestBadge />}
             </Box>
         </HStack>
     );
