@@ -168,6 +168,7 @@ export interface IMovieVideosResponse {
 
 export interface IMovieImagesResponse {
     backdrops: IImageResponse[];
+    logos: IImageResponse[];
 }
 
 /**
@@ -294,4 +295,5 @@ export interface ITVVideosResponse {
 
 export interface ITVImagesResponse {
     backdrops: IImageResponse[];
+    logos: IImageResponse[];
 }

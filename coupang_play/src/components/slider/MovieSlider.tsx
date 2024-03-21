@@ -10,10 +10,19 @@ import { Box, Icon, Text, VStack } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { AnimatePresence } from "framer-motion";
 import { Frames } from "./style";
-import { SlideVariants } from "../../global/projectCommon";
+import {
+    BasicInformation,
+    CreditInformation,
+    DetailInformation,
+    LogoInformation,
+    SlideVariants,
+    VideoInformation,
+} from "../../global/projectCommon";
 import { backdropParser, imagePathGenerator } from "../../utils";
 import { MovieHandlerAPI } from "../../global/api";
 import { useSuspenseQueries } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 
 interface IProps {
     title: string;
@@ -21,6 +30,7 @@ interface IProps {
 }
 
 export default function MovieSlider({ title, movieResults }: IProps) {
+    const navigate = useNavigate();
     const movieAPI = new MovieHandlerAPI();
 
     const [endIndex, setEndIndex] = useState(6);
@@ -62,8 +72,24 @@ export default function MovieSlider({ title, movieResults }: IProps) {
         (image) => image.data.backdrops
     ) as any;
 
-    console.log("image datas");
-    console.log(imageDatas);
+    const logoDatas = images.map((image) => image.data.logos) as any;
+
+    const credits = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: [`${title}_credits`, data.id],
+            queryFn: movieAPI.credits,
+            staleTime: Infinity,
+        })),
+    });
+    const creditDatas: IVideoResult[] = credits.map(
+        (credit) => credit.data
+    ) as any;
+
+    const setBasic = useSetRecoilState(BasicInformation);
+    const setDetail = useSetRecoilState(DetailInformation);
+    const setCredit = useSetRecoilState(CreditInformation);
+    const setVideo = useSetRecoilState(VideoInformation);
+    const setLogo = useSetRecoilState(LogoInformation);
 
     function onLeftClick() {
         if (moving) return;
@@ -109,6 +135,17 @@ export default function MovieSlider({ title, movieResults }: IProps) {
         }
         setDirection(1);
         setMoving(true);
+    }
+
+    console.log(imageDatas);
+
+    function onMovieClick(title: string, index: number) {
+        setBasic(movieResults[index]);
+        setDetail(detailDatas[index]);
+        setCredit(creditDatas[index]);
+        setVideo(videoDatas[index]);
+        setLogo(logoDatas[index]);
+        navigate(`/home/movies/${title}`);
     }
 
     return (
@@ -174,7 +211,7 @@ export default function MovieSlider({ title, movieResults }: IProps) {
                         .slice(startIndex, endIndex)
                         .map((movie, index) => (
                             <Box
-                                key={index}
+                                key={index + startIndex}
                                 h="100%"
                                 borderRadius="5px"
                                 bgSize="cover"
@@ -192,6 +229,12 @@ export default function MovieSlider({ title, movieResults }: IProps) {
                                 }}
                                 // position="relative"
                                 transition="all 0.2s linear"
+                                onClick={() =>
+                                    onMovieClick(
+                                        movie.title,
+                                        index + startIndex
+                                    )
+                                }
                             />
                         ))}
                 </Frames>

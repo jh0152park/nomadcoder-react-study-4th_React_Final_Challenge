@@ -13,9 +13,6 @@ import OneLineSkeleton from "../components/home/skeleton/OneLineSkeleton";
 function Movies() {
     const entireDatas = useOutletContext<IEntireDatas>();
 
-    console.log("Entire Datas");
-    console.log(entireDatas);
-
     return (
         <>
             <Helmet>
