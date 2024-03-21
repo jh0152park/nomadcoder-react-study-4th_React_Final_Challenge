@@ -25,8 +25,7 @@ export default function Summary({ score, genre, runtime }: ISummaryProps) {
 function convertRuntime(runtime: number): string {
     const h = Math.floor(runtime / 60);
     const m = runtime % 60;
-    const M = m > 9 ? m + "" : `0${m}`;
 
-    if (h) return `${h}시간 ${M}분`;
-    return `${M}분`;
+    if (h) return `${h}시간 ${String(m).padStart(2, "0")}분`;
+    return `${m}분`;
 }
