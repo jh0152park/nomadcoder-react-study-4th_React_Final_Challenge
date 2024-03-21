@@ -60,22 +60,22 @@ export default function HomeLayout() {
         staleTime: Infinity,
     });
     const mExtra1 = useSuspenseQuery<IMovieListsResponse>({
-        queryKey: ["mExtra1", 3],
+        queryKey: ["mExtra1", 2],
         queryFn: movieAPI.popular,
         staleTime: Infinity,
     });
     const mExtra2 = useSuspenseQuery<IMovieListsResponse>({
-        queryKey: ["mExtra2", 4],
+        queryKey: ["mExtra2", 3],
         queryFn: movieAPI.popular,
         staleTime: Infinity,
     });
     const mExtra3 = useSuspenseQuery<IMovieListsResponse>({
-        queryKey: ["mExtra3", 3],
+        queryKey: ["mExtra3", 2],
         queryFn: movieAPI.topRated,
         staleTime: Infinity,
     });
     const mExtra4 = useSuspenseQuery<IMovieListsResponse>({
-        queryKey: ["mExtra4", 4],
+        queryKey: ["mExtra4", 3],
         queryFn: movieAPI.topRated,
         staleTime: Infinity,
     });
@@ -102,22 +102,22 @@ export default function HomeLayout() {
         staleTime: Infinity,
     });
     const tExtra1 = useSuspenseQuery<ITVListsResponse>({
-        queryKey: ["tExtra1", 3],
+        queryKey: ["tExtra1", 2],
         queryFn: tvAPI.popular,
         staleTime: Infinity,
     });
     const tExtra2 = useSuspenseQuery<ITVListsResponse>({
-        queryKey: ["tExtra2", 4],
+        queryKey: ["tExtra2", 3],
         queryFn: tvAPI.popular,
         staleTime: Infinity,
     });
     const tExtra3 = useSuspenseQuery<ITVListsResponse>({
-        queryKey: ["tExtra3", 3],
+        queryKey: ["tExtra3", 2],
         queryFn: tvAPI.topRated,
         staleTime: Infinity,
     });
     const tExtra4 = useSuspenseQuery<ITVListsResponse>({
-        queryKey: ["tExtra4", 4],
+        queryKey: ["tExtra4", 3],
         queryFn: tvAPI.topRated,
         staleTime: Infinity,
     });

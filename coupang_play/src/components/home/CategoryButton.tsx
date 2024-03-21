@@ -2,6 +2,7 @@ import { Center } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { CURRENT_CATEGORY } from "../../global/projectCommon";
+import { goToTop } from "../../utils";
 
 interface IProps {
     category: string;
@@ -14,6 +15,7 @@ export default function CategoryButton({ category, url }: IProps) {
         useRecoilState(CURRENT_CATEGORY);
 
     function onCategoryClick() {
+        goToTop();
         setCurrentCategory(category);
         navigate(`/home/${url}`);
     }
