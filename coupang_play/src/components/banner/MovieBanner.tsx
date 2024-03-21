@@ -16,13 +16,13 @@ import {
 } from "./style";
 import {
     IMovieDetailsResponse,
-    IMovieImagesResponse,
     IMovieResult,
     IVideoResult,
 } from "../../global/apiResponse";
 
 import Summary from "./Summary";
 import React from "react";
+import YouTube from "react-youtube";
 
 interface IBannerProps {
     movieResults: IMovieResult[];
@@ -58,9 +58,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
             staleTime: Infinity,
         })),
     });
-    const videoDatas: IVideoResult[] = videos.map(
-        (video) => video.data.results
-    ) as any;
+    const videoDatas = videos.map((video) => video.data.results) as any;
 
     const images = useSuspenseQueries({
         queries: movieResults!.map((data) => ({
@@ -72,6 +70,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
     const logoDatas = images.map((image) => image.data.logos) as any;
 
     let logoPath = "";
+    let videoKey = "";
 
     function onLeftClick() {
         if (moving) return;
@@ -118,6 +117,21 @@ function MovieBanner({ movieResults }: IBannerProps) {
         }
     }
 
+    function getVideoKey() {
+        const youtube = videoDatas[startIndex].filter(
+            (v: any) => v.site.toLowerCase() === "youtube"
+        );
+        const trailer = videoDatas[startIndex].filter(
+            (v: any) => v.type.toLowerCase() === "trailer"
+        );
+        videoKey =
+            trailer.length > 0
+                ? trailer[0].key
+                : youtube.length > 0
+                ? youtube[0].key
+                : "";
+    }
+
     function getLogoImage() {
         const logos = logoDatas[startIndex].filter(
             (logo: any) => logo.iso_639_1 === "en"
@@ -135,7 +149,9 @@ function MovieBanner({ movieResults }: IBannerProps) {
         document.body.style.overflow = "unset";
     }
 
+    getVideoKey();
     getLogoImage();
+
     return (
         <Box w="100%" h="685px" position="relative">
             <Icon
@@ -233,7 +249,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
                         >
                             {logoPath ? (
                                 <Image
-                                    w="400px"
+                                    w="350px"
                                     src={imagePathGenerator(
                                         logoPath,
                                         "original"
@@ -286,7 +302,33 @@ function MovieBanner({ movieResults }: IBannerProps) {
                                         transition={{
                                             type: "tween",
                                         }}
-                                    ></BannerDetail>
+                                    >
+                                        {videoKey ? (
+                                            <YouTube
+                                                videoId={videoKey}
+                                                opts={{
+                                                    width: "1120",
+                                                    height: "630",
+                                                    playerVars: {
+                                                        autoplay: 1,
+                                                        rel: 0,
+                                                        modestbranding: 1,
+                                                    },
+                                                }}
+                                            />
+                                        ) : (
+                                            <Image
+                                                w="100%"
+                                                h="100%"
+                                                src={imagePathGenerator(
+                                                    data.backdrop_path ||
+                                                        data.poster_path,
+                                                    "original"
+                                                )}
+                                                objectFit="cover"
+                                            />
+                                        )}
+                                    </BannerDetail>
                                 </Overlay>
                             </AnimatePresence>
                         )}
