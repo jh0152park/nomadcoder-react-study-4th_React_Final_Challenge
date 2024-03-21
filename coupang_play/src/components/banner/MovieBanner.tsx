@@ -326,6 +326,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
                                                     "original"
                                                 )}
                                                 objectFit="cover"
+                                                borderRadius="10px"
                                             />
                                         )}
                                     </BannerDetail>

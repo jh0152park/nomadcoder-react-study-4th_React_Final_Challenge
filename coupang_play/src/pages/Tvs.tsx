@@ -4,6 +4,7 @@ import { IEntireDatas } from "./HomeLayout";
 import { Helmet } from "react-helmet";
 import MainSkeleton from "../components/home/skeleton/MainSkeleton";
 import TVBanner from "../components/banner/TVBanner";
+import GenreCategories from "../components/genre/GenreCategories";
 
 function Tvs() {
     const entireDatas = useOutletContext<IEntireDatas>();
@@ -17,6 +18,8 @@ function Tvs() {
             <Suspense fallback={<MainSkeleton />}>
                 <TVBanner tvResults={entireDatas?.tAiringToday} />
             </Suspense>
+
+            <GenreCategories category="tv" />
         </>
     );
 }

@@ -321,6 +321,7 @@ function TVBanner({ tvResults }: IBannerProps) {
                                                     "original"
                                                 )}
                                                 objectFit="cover"
+                                                borderRadius="10px"
                                             />
                                         )}
                                     </BannerDetail>

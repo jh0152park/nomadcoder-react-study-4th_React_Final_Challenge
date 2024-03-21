@@ -219,6 +219,7 @@ export default function Detail() {
                                                 "original"
                                             )}
                                             objectFit="cover"
+                                            borderRadius="10px"
                                         />
                                     )}
                                 </BannerDetail>
