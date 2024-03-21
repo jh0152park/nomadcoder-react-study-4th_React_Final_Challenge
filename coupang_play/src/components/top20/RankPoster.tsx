@@ -1,11 +1,13 @@
-import { Box, HStack, Image } from "@chakra-ui/react";
+import { Box, Center, HStack, Image } from "@chakra-ui/react";
 
 interface IProps {
     rank: number;
     poster: string;
+    newest?: boolean;
+    monopoly?: boolean;
 }
 
-export default function RankPoster({ rank, poster }: IProps) {
+export default function RankPoster({ rank, poster, newest, monopoly }: IProps) {
     console.log(`input poster path: ${poster}`);
     console.log(`url(${poster})`);
 
@@ -37,7 +39,43 @@ export default function RankPoster({ rank, poster }: IProps) {
                 bgPosition="center"
                 bgImage={`url(${poster})`}
                 borderRadius="5px"
-            />
+                position="relative"
+            >
+                {monopoly && (
+                    <Center
+                        w="60px"
+                        h="30px"
+                        fontSize="13px"
+                        bgColor="black"
+                        border="1px solid gray"
+                        position="absolute"
+                        top="5px"
+                        left="5px"
+                        borderRadius="5px"
+                        fontWeight="bold"
+                    >
+                        <span style={{ color: "rgb(45, 184, 255)" }}>쿠플</span>
+                        <span style={{ color: "white" }}>|</span>
+                        <span style={{ color: "white" }}>독점</span>
+                    </Center>
+                )}
+                {newest && (
+                    <Center
+                        w="35px"
+                        h="30px"
+                        fontSize="13px"
+                        bgColor="black"
+                        border="1px solid gray"
+                        position="absolute"
+                        top="5px"
+                        left="5px"
+                        borderRadius="5px"
+                        fontWeight="bold"
+                    >
+                        <span style={{ color: "rgb(45, 184, 255)" }}>신규</span>
+                    </Center>
+                )}
+            </Box>
         </HStack>
     );
 }
