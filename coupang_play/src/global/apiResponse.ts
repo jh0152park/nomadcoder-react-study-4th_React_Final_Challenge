@@ -145,7 +145,7 @@ export interface IMovieDetailsResponse {
     vote_count: number;
 }
 
-interface IImageResponse {
+export interface IImageResponse {
     aspect_ratio: number;
     height: number;
     iso_639_1: string | null;

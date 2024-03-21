@@ -10,9 +10,6 @@ interface IProps {
 }
 
 export default function RankPoster({ rank, poster, newest, monopoly }: IProps) {
-    console.log(`input poster path: ${poster}`);
-    console.log(`url(${poster})`);
-
     return (
         <HStack
             h="180px"
