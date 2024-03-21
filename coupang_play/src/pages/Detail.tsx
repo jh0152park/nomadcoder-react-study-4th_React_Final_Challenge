@@ -15,8 +15,14 @@ import { FaPlay } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { AnimatePresence, useScroll } from "framer-motion";
 import YouTube from "react-youtube";
+import LikeButton from "../components/detail/LikeButton";
+import { useLocation } from "react-router-dom";
+import ShareButton from "../components/detail/ShareButton";
 
 export default function Detail() {
+    const { pathname } = useLocation();
+    const category = pathname.includes("movies") ? "movie" : "tv";
+
     const { scrollY } = useScroll();
     const [playButton, setPlayButton] = useState(false);
 
@@ -29,14 +35,14 @@ export default function Detail() {
     let logoPath = "";
     let videoKey = "";
 
-    console.log("Basic");
-    console.log(basic);
-    console.log("detail");
-    console.log(detail);
-    console.log("credit");
-    console.log(credit);
-    console.log("video");
-    console.log(video);
+    // console.log("Basic");
+    // console.log(basic);
+    // console.log("detail");
+    // console.log(detail);
+    // console.log("credit");
+    // console.log(credit);
+    // console.log("video");
+    // console.log(video);
 
     function actorsParser(): string {
         const temp = credit.cast.slice(0, 10).map((actor: any) => actor.name);
@@ -152,6 +158,9 @@ export default function Detail() {
                                 </Text>
                             </HStack>
                         </PlayButton>
+
+                        <LikeButton category={category} id={basic.id} />
+                        <ShareButton />
                     </HStack>
                     <Text my="20px" fontWeight="bold" fontSize="30px">
                         {detail.overview.slice(0, 130)}...

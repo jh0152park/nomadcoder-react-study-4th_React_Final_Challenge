@@ -73,3 +73,15 @@ export const LogoInformation = atom<any>({
     key: "LogoInformation",
     default: [],
 });
+
+export const FAVORITE_MOVIES = atom({
+    key: "FAVORITE_MOVIES",
+    default: [],
+    effects_UNSTABLE: [persistAtom],
+});
+
+export const FAVORITE_TVS = atom({
+    key: "FAVORITE_TVS",
+    default: [],
+    effects_UNSTABLE: [persistAtom],
+});
