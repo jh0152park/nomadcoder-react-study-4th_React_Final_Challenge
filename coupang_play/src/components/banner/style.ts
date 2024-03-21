@@ -52,9 +52,10 @@ export const PlayButton = styled(motion.div)`
 
 export const Overlay = styled(motion.div)`
     width: 100vw;
-    height: 100%;
-    position: absolute;
+    height: 200vh;
+    position: fixed;
     top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,8 +64,8 @@ export const Overlay = styled(motion.div)`
 `;
 
 export const BannerDetail = styled(motion.div)`
-    width: 700px;
-    height: 600px;
+    width: 1120px;
+    height: 630px;
     background-color: #171717;
     border-radius: 10px;
     position: absolute;

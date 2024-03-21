@@ -10,11 +10,16 @@ import { Helmet } from "react-helmet";
 import { Box, HStack, Icon, Image, Text, VStack } from "@chakra-ui/react";
 import { goToTop, imagePathGenerator } from "../utils";
 import Summary from "../components/banner/Summary";
-import { PlayButton } from "../components/banner/style";
+import { BannerDetail, Overlay, PlayButton } from "../components/banner/style";
 import { FaPlay } from "react-icons/fa";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, useScroll } from "framer-motion";
+import YouTube from "react-youtube";
 
 export default function Detail() {
+    const { scrollY } = useScroll();
+    const [playButton, setPlayButton] = useState(false);
+
     const basic = useRecoilValue(BasicInformation);
     const detail = useRecoilValue(DetailInformation);
     const credit = useRecoilValue(CreditInformation);
@@ -22,6 +27,7 @@ export default function Detail() {
     const logo = useRecoilValue(LogoInformation);
 
     let logoPath = "";
+    let videoKey = "";
 
     console.log("Basic");
     console.log(basic);
@@ -44,14 +50,41 @@ export default function Detail() {
         return genres.slice(0, 90) + " ...";
     }
 
+    function getVideoKey() {
+        const youtube = video.filter(
+            (v: any) => v.site.toLowerCase() === "youtube"
+        );
+        const trailer = video.filter(
+            (v: any) => v.type.toLowerCase() === "trailer"
+        );
+        videoKey =
+            trailer.length > 0
+                ? trailer[0].key
+                : youtube.length > 0
+                ? youtube[0].key
+                : "";
+    }
+
     function getLogoImage() {
         const logos = logo.filter((l: any) => l.iso_639_1 === "en");
         logoPath = logos.length > 0 ? logos[0].file_path : "";
     }
 
+    function modalOpen() {
+        setPlayButton(true);
+        document.body.style.overflow = "hidden";
+    }
+
+    function modalClose() {
+        setPlayButton(false);
+        document.body.style.overflow = "unset";
+    }
+
     useEffect(() => {
         goToTop();
     }, []);
+
+    getVideoKey();
     getLogoImage();
 
     return (
@@ -84,7 +117,7 @@ export default function Detail() {
                 >
                     {logoPath ? (
                         <Image
-                            w="400px"
+                            w="350px"
                             src={imagePathGenerator(logoPath, "original")}
                             objectFit="cover"
                         />
@@ -105,7 +138,7 @@ export default function Detail() {
                     <HStack>
                         <PlayButton
                             layoutId={`detail_${basic.title || basic.name}`}
-                            // onClick={modalOpen}
+                            onClick={modalOpen}
                         >
                             <HStack>
                                 <Icon
@@ -139,6 +172,50 @@ export default function Detail() {
                         <Text mr="50px">장르</Text>
                         <Text>{genresParser()}</Text>
                     </HStack>
+
+                    {playButton && (
+                        <AnimatePresence>
+                            <Overlay onClick={modalClose}>
+                                <BannerDetail
+                                    style={{
+                                        top: scrollY.get() + 200,
+                                    }}
+                                    layoutId={`detail_${
+                                        basic.title || basic.name
+                                    }`}
+                                    transition={{
+                                        type: "tween",
+                                    }}
+                                >
+                                    {videoKey ? (
+                                        <YouTube
+                                            videoId={videoKey}
+                                            opts={{
+                                                width: "1120",
+                                                height: "630",
+                                                playerVars: {
+                                                    autoplay: 1,
+                                                    rel: 0,
+                                                    modestbranding: 1,
+                                                },
+                                            }}
+                                        />
+                                    ) : (
+                                        <Image
+                                            w="100%"
+                                            h="100%"
+                                            src={imagePathGenerator(
+                                                basic.backdrop_path ||
+                                                    basic.poster_path,
+                                                "original"
+                                            )}
+                                            objectFit="cover"
+                                        />
+                                    )}
+                                </BannerDetail>
+                            </Overlay>
+                        </AnimatePresence>
+                    )}
                 </VStack>
             </Box>
         </>
