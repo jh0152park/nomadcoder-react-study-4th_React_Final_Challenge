@@ -14,7 +14,12 @@ import {
     Overlay,
     PlayButton,
 } from "./style";
-import { IMovieDetailsResponse, IMovieResult } from "../../global/apiResponse";
+import {
+    IMovieDetailsResponse,
+    IMovieResult,
+    IMovieVideosResponse,
+    IVideoResult,
+} from "../../global/apiResponse";
 
 import Summary from "./Summary";
 import React from "react";
@@ -37,13 +42,24 @@ function MovieBanner({ movieResults }: IBannerProps) {
 
     const details = useSuspenseQueries({
         queries: movieResults!.map((data) => ({
-            queryKey: ["movieDetail", data.id],
+            queryKey: ["movieBannerDetails", data.id],
             queryFn: movieAPI.details,
             staleTime: Infinity,
         })),
     });
     const detailDatas: IMovieDetailsResponse[] = details.map(
         (deail) => deail.data
+    ) as any;
+
+    const videos = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: ["movieBannerVideos", data.id],
+            queryFn: movieAPI.videos,
+            staleTime: Infinity,
+        })),
+    });
+    const videoDatas: IVideoResult[] = videos.map(
+        (video) => video.data.results
     ) as any;
 
     function onLeftClick() {
@@ -101,8 +117,12 @@ function MovieBanner({ movieResults }: IBannerProps) {
         document.body.style.overflow = "unset";
     }
 
-    console.log(detailDatas);
-    console.log(movieResults);
+    // console.log("Movie Main Banner Data");
+    // console.log(movieResults);
+    // console.log("Movie Main Banner's Detail Data");
+    // console.log(detailDatas);
+    // console.log("Movie Main Banner's Video Data");
+    // console.log(videoDatas);
 
     useEffect(() => {
         const id = setInterval(onRightClick, 10 * 1000);

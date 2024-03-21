@@ -100,7 +100,7 @@ interface ICrew {
     job: string;
 }
 
-interface IVideoResult {
+export interface IVideoResult {
     iso_639_1: string;
     iso_3166_1: string;
     name: string;

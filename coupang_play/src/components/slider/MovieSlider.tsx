@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { IMovieResult } from "../../global/apiResponse";
+import {
+    IMovieDetailsResponse,
+    IMovieResult,
+    IVideoResult,
+} from "../../global/apiResponse";
 import { Box, Icon, Text, VStack } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { AnimatePresence } from "framer-motion";
 import { Frames } from "./style";
 import { SlideVariants } from "../../global/projectCommon";
 import { imagePathGenerator } from "../../utils";
+import { MovieHandlerAPI } from "../../global/api";
+import { useSuspenseQueries } from "@tanstack/react-query";
 
 interface IProps {
     title: string;
@@ -13,11 +19,35 @@ interface IProps {
 }
 
 export default function MovieSlider({ title, movieResults }: IProps) {
+    const movieAPI = new MovieHandlerAPI();
+
     const [endIndex, setEndIndex] = useState(6);
     const [startIndex, setStartIndex] = useState(0);
 
     const [direction, setDirection] = useState(1);
     const [moving, setMoving] = useState(false);
+
+    const details = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: [`${title}_details`, data.id],
+            queryFn: movieAPI.details,
+            staleTime: Infinity,
+        })),
+    });
+    const detailDatas: IMovieDetailsResponse[] = details.map(
+        (deail) => deail.data
+    ) as any;
+
+    const videos = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: [`${title}_videos`, data.id],
+            queryFn: movieAPI.videos,
+            staleTime: Infinity,
+        })),
+    });
+    const videoDatas: IVideoResult[] = videos.map(
+        (video) => video.data.results
+    ) as any;
 
     function onLeftClick() {
         if (moving) return;
@@ -113,7 +143,7 @@ export default function MovieSlider({ title, movieResults }: IProps) {
                 onExitComplete={() => setMoving(false)}
             >
                 <Frames
-                    key={startIndex}
+                    key={`${title}_${startIndex}`}
                     variants={SlideVariants}
                     initial="start"
                     animate="end"
