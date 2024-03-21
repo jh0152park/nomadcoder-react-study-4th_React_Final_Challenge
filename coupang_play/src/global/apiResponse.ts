@@ -145,6 +145,16 @@ export interface IMovieDetailsResponse {
     vote_count: number;
 }
 
+interface IImageResponse {
+    aspect_ratio: number;
+    height: number;
+    iso_639_1: string | null;
+    file_path: string;
+    vote_average: number;
+    vote_count: number;
+    width: number;
+}
+
 export interface IMovieCreditsResponse {
     id: number;
     cast: ICast[];
@@ -154,6 +164,10 @@ export interface IMovieCreditsResponse {
 export interface IMovieVideosResponse {
     id: number;
     results: IVideoResult[];
+}
+
+export interface IMovieImagesResponse {
+    backdrops: IImageResponse[];
 }
 
 /**
@@ -276,4 +290,8 @@ export interface ITVCreditsResponse {
 export interface ITVVideosResponse {
     id: number;
     results: IVideoResult[];
+}
+
+export interface ITVImagesResponse {
+    backdrops: IImageResponse[];
 }

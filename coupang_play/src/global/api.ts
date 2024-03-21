@@ -152,6 +152,22 @@ export class MovieHandlerAPI {
             options
         ).then((response) => response.json());
     }
+
+    public async images({ queryKey }: QueryFunctionContext) {
+        const [_, id] = queryKey;
+        const options = {
+            method: "GET",
+            headers: {
+                accept: "application/json",
+                Authorization:
+                    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzlhNzA4ODRhMTY2ZDQ2ODE0ZTYwNTMwMTU2OGQyZCIsInN1YiI6IjY0YmEyMDIwMzAwOWFhMDBlMjY0Y2VhZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eHILwGMMFNYioeUQaVUSgf_kU4PRKZP99iDQOHXQRpI",
+            },
+        };
+
+        fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options).then(
+            (response) => response.json()
+        );
+    }
 }
 
 /* eslint-disable */
@@ -273,5 +289,21 @@ export class TVHandlerAPI {
             `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`,
             options
         ).then((response) => response.json());
+    }
+
+    public async images({ queryKey }: QueryFunctionContext) {
+        const [_, id] = queryKey;
+        const options = {
+            method: "GET",
+            headers: {
+                accept: "application/json",
+                Authorization:
+                    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzlhNzA4ODRhMTY2ZDQ2ODE0ZTYwNTMwMTU2OGQyZCIsInN1YiI6IjY0YmEyMDIwMzAwOWFhMDBlMjY0Y2VhZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eHILwGMMFNYioeUQaVUSgf_kU4PRKZP99iDQOHXQRpI",
+            },
+        };
+
+        fetch(`https://api.themoviedb.org/3/tv/${id}/images`, options).then(
+            (response) => response.json()
+        );
     }
 }
