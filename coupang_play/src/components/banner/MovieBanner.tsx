@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { AnimatePresence, useScroll } from "framer-motion";
 import { useSuspenseQueries } from "@tanstack/react-query";
-import { Box, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import { Box, HStack, Icon, Image, Text, VStack } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { imagePathGenerator } from "../../utils";
@@ -16,8 +16,8 @@ import {
 } from "./style";
 import {
     IMovieDetailsResponse,
+    IMovieImagesResponse,
     IMovieResult,
-    IMovieVideosResponse,
     IVideoResult,
 } from "../../global/apiResponse";
 
@@ -61,6 +61,17 @@ function MovieBanner({ movieResults }: IBannerProps) {
     const videoDatas: IVideoResult[] = videos.map(
         (video) => video.data.results
     ) as any;
+
+    const images = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: [`movieBannerImages`, data.id],
+            queryFn: movieAPI.images,
+            staleTime: Infinity,
+        })),
+    });
+    const logoDatas = images.map((image) => image.data.logos) as any;
+
+    let logoPath = "";
 
     function onLeftClick() {
         if (moving) return;
@@ -107,6 +118,13 @@ function MovieBanner({ movieResults }: IBannerProps) {
         }
     }
 
+    function getLogoImage() {
+        const logos = logoDatas[startIndex].filter(
+            (logo: any) => logo.iso_639_1 === "en"
+        );
+        logoPath = logos.length > 0 ? logos[0].file_path : "";
+    }
+
     function modalOpen() {
         setPlayButton(true);
         document.body.style.overflow = "hidden";
@@ -117,13 +135,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
         document.body.style.overflow = "unset";
     }
 
-    // console.log("Movie Main Banner Data");
-    // console.log(movieResults);
-    // console.log("Movie Main Banner's Detail Data");
-    // console.log(detailDatas);
-    // console.log("Movie Main Banner's Video Data");
-    // console.log(videoDatas);
-
+    getLogoImage();
     return (
         <Box w="100%" h="685px" position="relative">
             <Icon
@@ -210,18 +222,33 @@ function MovieBanner({ movieResults }: IBannerProps) {
                     >
                         <VStack
                             w="50%"
-                            h="30%"
+                            h="100%"
                             alignItems="flex-start"
-                            mt="250px"
-                            ml="80px"
+                            justifyContent="center"
+                            position="absolute"
+                            left="80px"
+                            top="0"
+                            bottom="0"
+                            my="auto"
                         >
-                            <Text
-                                fontWeight="bold"
-                                fontSize="60px"
-                                textAlign="left"
-                            >
-                                {data.title}
-                            </Text>
+                            {logoPath ? (
+                                <Image
+                                    w="400px"
+                                    src={imagePathGenerator(
+                                        logoPath,
+                                        "original"
+                                    )}
+                                    objectFit="cover"
+                                />
+                            ) : (
+                                <Text
+                                    fontWeight="bold"
+                                    fontSize="60px"
+                                    textAlign="left"
+                                >
+                                    {data.title}
+                                </Text>
+                            )}
                             <Summary
                                 runtime={detailDatas[startIndex].runtime}
                                 score={detailDatas[startIndex].vote_average}

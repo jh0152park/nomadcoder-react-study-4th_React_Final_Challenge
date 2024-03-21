@@ -48,3 +48,28 @@ export const SlideVariants = {
         x: (-window.outerWidth - 5) * direction,
     }),
 };
+
+export const BasicInformation = atom<any>({
+    key: "BasicInformation",
+    default: [],
+});
+
+export const DetailInformation = atom<any>({
+    key: "DetailInformation",
+    default: [],
+});
+
+export const CreditInformation = atom<any>({
+    key: "CreditInformation",
+    default: [],
+});
+
+export const VideoInformation = atom<any>({
+    key: "VideoInformation",
+    default: [],
+});
+
+export const LogoInformation = atom<any>({
+    key: "LogoInformation",
+    default: [],
+});

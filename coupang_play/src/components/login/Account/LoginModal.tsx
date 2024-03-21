@@ -50,11 +50,11 @@ export default function LoginModal({ isOpen, onClose }: IModalProps) {
     const mutation = useMutation({
         mutationFn: apiHandler.login,
         onMutate: () => {
-            console.log(`start to login.`);
+            // console.log(`start to login.`);
         },
         onSuccess: (result: IUserHandlerResponse) => {
-            console.log("login mutation success");
-            console.log(result);
+            // console.log("login mutation success");
+            // console.log(result);
             toast({
                 status: "success",
                 title: `${result.name}님 환영합니다`,

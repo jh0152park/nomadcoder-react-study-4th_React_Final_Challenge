@@ -1,21 +1,64 @@
 import { Box, Center, HStack, Image } from "@chakra-ui/react";
 import MonopolyBadge from "./MonoplyBadge";
 import NewestBadge from "./NewestBadge";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import {
+    BasicInformation,
+    CreditInformation,
+    DetailInformation,
+    LogoInformation,
+    VideoInformation,
+} from "../../global/projectCommon";
 
 interface IProps {
+    title: string;
     rank: number;
     poster: string;
     newest?: boolean;
     monopoly?: boolean;
+    basic: any;
+    detail: any;
+    credit: any;
+    video: any;
+    logo: any;
 }
 
-export default function RankPoster({ rank, poster, newest, monopoly }: IProps) {
+export default function RankPoster({
+    title,
+    rank,
+    poster,
+    newest,
+    monopoly,
+    basic,
+    detail,
+    credit,
+    video,
+    logo,
+}: IProps) {
+    const navigate = useNavigate();
+    const setBasic = useSetRecoilState(BasicInformation);
+    const setDetail = useSetRecoilState(DetailInformation);
+    const setCredit = useSetRecoilState(CreditInformation);
+    const setVideo = useSetRecoilState(VideoInformation);
+    const setLogo = useSetRecoilState(LogoInformation);
+
+    function onMovieClick() {
+        setBasic(basic);
+        setDetail(detail);
+        setCredit(credit);
+        setVideo(video);
+        setLogo(logo);
+        navigate(`/home/movies/${title}`);
+    }
+
     return (
         <HStack
             h="180px"
             justifyContent="flex-start"
             alignItems="end"
             spacing="0"
+            onClick={onMovieClick}
         >
             <Box
                 w="50%"

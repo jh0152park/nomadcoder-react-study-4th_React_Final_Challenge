@@ -50,6 +50,26 @@ export default function MovieTop20({ movieResults }: IProps) {
         (video) => video.data.results
     ) as any;
 
+    const credits = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: ["movieTop20Credits", data.id],
+            queryFn: movieAPI.credits,
+            staleTime: Infinity,
+        })),
+    });
+    const creditDatas: IVideoResult[] = credits.map(
+        (credit) => credit.data
+    ) as any;
+
+    const images = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: [`movieTop20Images`, data.id],
+            queryFn: movieAPI.images,
+            staleTime: Infinity,
+        })),
+    });
+    const logoDatas = images.map((image) => image.data.logos) as any;
+
     function onLeftClick() {
         if (moving) return;
 
@@ -159,14 +179,20 @@ export default function MovieTop20({ movieResults }: IProps) {
                         .slice(startIndex, endIndex)
                         .map((movie, index) => (
                             <RankPoster
-                                key={index}
+                                key={index + startIndex}
+                                title={movie.title}
                                 rank={index + startIndex + 1}
                                 poster={imagePathGenerator(
                                     movie.poster_path || movie.backdrop_path,
-                                    "original"
+                                    "300"
                                 )}
                                 newest={index + startIndex < 3}
                                 monopoly={(index + startIndex + 1) % 5 === 0}
+                                basic={movieResults[index + startIndex]}
+                                detail={detailDatas[index + startIndex]}
+                                credit={creditDatas[index + startIndex]}
+                                video={videoDatas[index + startIndex]}
+                                logo={logoDatas[index + startIndex]}
                             />
                         ))}
                 </Frames>
