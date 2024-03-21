@@ -1,6 +1,8 @@
 import { useState } from "react";
 import {
+    IImageResponse,
     IMovieDetailsResponse,
+    IMovieImagesResponse,
     IMovieResult,
     IVideoResult,
 } from "../../global/apiResponse";
@@ -9,7 +11,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { AnimatePresence } from "framer-motion";
 import { Frames } from "./style";
 import { SlideVariants } from "../../global/projectCommon";
-import { imagePathGenerator } from "../../utils";
+import { backdropParser, imagePathGenerator } from "../../utils";
 import { MovieHandlerAPI } from "../../global/api";
 import { useSuspenseQueries } from "@tanstack/react-query";
 
@@ -48,6 +50,20 @@ export default function MovieSlider({ title, movieResults }: IProps) {
     const videoDatas: IVideoResult[] = videos.map(
         (video) => video.data.results
     ) as any;
+
+    const images = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: [`${title}_images`, data.id],
+            queryFn: movieAPI.images,
+            staleTime: Infinity,
+        })),
+    });
+    const imageDatas: IMovieImagesResponse[] = images.map(
+        (image) => image.data.backdrops
+    ) as any;
+
+    console.log("image datas");
+    console.log(imageDatas);
 
     function onLeftClick() {
         if (moving) return;
@@ -163,17 +179,18 @@ export default function MovieSlider({ title, movieResults }: IProps) {
                                 borderRadius="5px"
                                 bgSize="cover"
                                 bgPosition="top center"
-                                bgImage={`url(${imagePathGenerator(
-                                    movie.backdrop_path || movie.poster_path,
-                                    "original"
+                                bgImage={`url(${backdropParser(
+                                    imageDatas[index + startIndex] as any,
+                                    movie.backdrop_path,
+                                    movie.poster_path
                                 )})`}
                                 _hover={{
                                     cursor: "pointer",
                                     transform: "scale(1.2)",
-                                    top: "-15px",
+                                    // top: "-15px",
                                     zIndex: "99",
                                 }}
-                                position="relative"
+                                // position="relative"
                                 transition="all 0.2s linear"
                             />
                         ))}

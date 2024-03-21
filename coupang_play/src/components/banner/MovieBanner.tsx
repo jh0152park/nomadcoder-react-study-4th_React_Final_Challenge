@@ -124,12 +124,6 @@ function MovieBanner({ movieResults }: IBannerProps) {
     // console.log("Movie Main Banner's Video Data");
     // console.log(videoDatas);
 
-    useEffect(() => {
-        const id = setInterval(onRightClick, 10 * 1000);
-
-        return () => clearInterval(id);
-    }, []);
-
     return (
         <Box w="100%" h="685px" position="relative">
             <Icon

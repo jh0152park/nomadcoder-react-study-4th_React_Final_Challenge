@@ -164,9 +164,10 @@ export class MovieHandlerAPI {
             },
         };
 
-        fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options).then(
-            (response) => response.json()
-        );
+        return fetch(
+            `https://api.themoviedb.org/3/movie/${id}/images`,
+            options
+        ).then((response) => response.json());
     }
 }
 
@@ -302,8 +303,9 @@ export class TVHandlerAPI {
             },
         };
 
-        fetch(`https://api.themoviedb.org/3/tv/${id}/images`, options).then(
-            (response) => response.json()
-        );
+        return fetch(
+            `https://api.themoviedb.org/3/tv/${id}/images`,
+            options
+        ).then((response) => response.json());
     }
 }
