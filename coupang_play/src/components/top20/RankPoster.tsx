@@ -42,6 +42,11 @@ export default function RankPoster({ rank, poster, newest, monopoly }: IProps) {
                 bgImage={`url(${poster})`}
                 borderRadius="5px"
                 position="relative"
+                _hover={{
+                    cursor: "pointer",
+                    transform: "scale(1.3)",
+                }}
+                transition="all 0.2s linear"
             >
                 {monopoly && <MonopolyBadge />}
                 {newest && <NewestBadge />}
