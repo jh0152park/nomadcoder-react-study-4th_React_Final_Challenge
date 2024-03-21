@@ -135,6 +135,8 @@ export default function MovieTop20({ movieResults }: IProps) {
                                     movie.poster_path || movie.backdrop_path,
                                     "original"
                                 )}
+                                newest={index + startIndex < 3}
+                                monopoly={(index + startIndex + 1) % 5 === 0}
                             ></RankPoster>
                         ))}
                 </Frames>

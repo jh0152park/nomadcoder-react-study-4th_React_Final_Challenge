@@ -27,5 +27,5 @@ function convertRuntime(runtime: number): string {
     const m = runtime % 60;
 
     if (h) return `${h}시간 ${String(m).padStart(2, "0")}분`;
-    return `${m}분`;
+    return `${String(m).padStart(2, "0")}분`;
 }
