@@ -6,6 +6,7 @@ import HomeLayout from "./pages/HomeLayout";
 import { Suspense } from "react";
 import Movies from "./pages/Movies";
 import HomeSkeleton from "./components/home/HomeSkeleton";
+import NotSupport from "./pages/NotSuppot";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,22 @@ const router = createBrowserRouter([
             {
                 path: "movies",
                 element: <Movies />,
+            },
+            {
+                path: "live",
+                element: <NotSupport />,
+            },
+            {
+                path: "buy",
+                element: <NotSupport />,
+            },
+            {
+                path: "kids",
+                element: <NotSupport />,
+            },
+            {
+                path: "news",
+                element: <NotSupport />,
             },
         ],
     },
