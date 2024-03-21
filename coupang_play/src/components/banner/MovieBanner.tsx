@@ -27,8 +27,8 @@ function MovieBanner({ movieResults }: IBannerProps) {
     const { scrollY } = useScroll();
     const movieAPI = new MovieHandlerAPI();
 
-    const [nextIndex, setNextIndex] = useState(1);
-    const [currentIndex, setCurretIndex] = useState(0);
+    const [endIndex, setEndIndex] = useState(1);
+    const [startIndex, setStartIndex] = useState(0);
 
     const [moving, setMoving] = useState(false);
     const [direction, setDirection] = useState(1);
@@ -49,12 +49,12 @@ function MovieBanner({ movieResults }: IBannerProps) {
     function onLeftClick() {
         if (moving) return;
 
-        if (currentIndex === 0) {
-            setCurretIndex(movieResults.length - 1);
-            setNextIndex(movieResults.length);
+        if (startIndex === 0) {
+            setStartIndex(movieResults.length - 1);
+            setEndIndex(movieResults.length);
         } else {
-            setCurretIndex((prev) => prev - 1);
-            setNextIndex((prev) => prev - 1);
+            setStartIndex((prev) => prev - 1);
+            setEndIndex((prev) => prev - 1);
         }
 
         setMoving(true);
@@ -64,10 +64,10 @@ function MovieBanner({ movieResults }: IBannerProps) {
     function onRightClick() {
         if (moving) return;
 
-        setCurretIndex((prev) =>
+        setStartIndex((prev) =>
             prev === movieResults.length - 1 ? 0 : prev + 1
         );
-        setNextIndex((prev) => (prev === movieResults.length ? 1 : prev + 1));
+        setEndIndex((prev) => (prev === movieResults.length ? 1 : prev + 1));
 
         setMoving(true);
         setDirection(1);
@@ -75,12 +75,12 @@ function MovieBanner({ movieResults }: IBannerProps) {
 
     function onDotClick(index: number) {
         if (moving) return;
-        if (index === currentIndex) return;
+        if (index === startIndex) return;
 
-        setCurretIndex(index);
-        setNextIndex(index + 1);
+        setStartIndex(index);
+        setEndIndex(index + 1);
 
-        if (index > currentIndex) {
+        if (index > startIndex) {
             // right
             setMoving(true);
             setDirection(1);
@@ -165,11 +165,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
                         h="8px"
                         key={i}
                         borderRadius="50%"
-                        bg={
-                            currentIndex === i
-                                ? "whitesmoke"
-                                : "rgb(57, 57, 57)"
-                        }
+                        bg={startIndex === i ? "whitesmoke" : "rgb(57, 57, 57)"}
                         _hover={{ cursor: "pointer" }}
                         onClick={() => onDotClick(i)}
                     />
@@ -181,7 +177,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
                 custom={direction}
                 onExitComplete={() => setMoving(false)}
             >
-                {movieResults?.slice(currentIndex, nextIndex).map((data) => (
+                {movieResults?.slice(startIndex, endIndex).map((data) => (
                     <MainImageBox
                         key={data.title}
                         custom={direction}
@@ -213,10 +209,10 @@ function MovieBanner({ movieResults }: IBannerProps) {
                                 {data.title}
                             </Text>
                             <Summary
-                                runtime={detailDatas[currentIndex].runtime}
-                                score={detailDatas[currentIndex].vote_average}
+                                runtime={detailDatas[startIndex].runtime}
+                                score={detailDatas[startIndex].vote_average}
                                 genre={
-                                    detailDatas[currentIndex].genres[0].name ||
+                                    detailDatas[startIndex].genres[0].name ||
                                     "영화"
                                 }
                             />
