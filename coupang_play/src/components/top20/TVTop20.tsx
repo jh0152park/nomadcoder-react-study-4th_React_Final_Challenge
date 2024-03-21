@@ -1,7 +1,7 @@
 import { Box, Text, Icon } from "@chakra-ui/react";
 import {
     IMovieDetailsResponse,
-    IMovieResult,
+    ITVResult,
     IVideoResult,
 } from "../../global/apiResponse";
 
@@ -13,14 +13,14 @@ import { SlideVariants } from "../../global/projectCommon";
 import RankPoster from "./RankPoster";
 import { imagePathGenerator } from "../../utils";
 import { useSuspenseQueries } from "@tanstack/react-query";
-import { MovieHandlerAPI } from "../../global/api";
+import { TVHandlerAPI } from "../../global/api";
 
 interface IProps {
-    movieResults: IMovieResult[];
+    tvResults: ITVResult[];
 }
 
-export default function MovieTop20({ movieResults }: IProps) {
-    const movieAPI = new MovieHandlerAPI();
+export default function TVTop20({ tvResults }: IProps) {
+    const tvAPI = new TVHandlerAPI();
 
     const [endIndex, setEndIndex] = useState(7);
     const [startIndex, setStartIndex] = useState(0);
@@ -29,9 +29,9 @@ export default function MovieTop20({ movieResults }: IProps) {
     const [moving, setMoving] = useState(false);
 
     const details = useSuspenseQueries({
-        queries: movieResults!.map((data) => ({
-            queryKey: ["movieTop20Details", data.id],
-            queryFn: movieAPI.details,
+        queries: tvResults!.map((data) => ({
+            queryKey: ["TVTop20Details", data.id],
+            queryFn: tvAPI.details,
             staleTime: Infinity,
         })),
     });
@@ -40,9 +40,9 @@ export default function MovieTop20({ movieResults }: IProps) {
     ) as any;
 
     const videos = useSuspenseQueries({
-        queries: movieResults!.map((data) => ({
-            queryKey: ["movieTop20Videos", data.id],
-            queryFn: movieAPI.videos,
+        queries: tvResults!.map((data) => ({
+            queryKey: ["TVTop20Videos", data.id],
+            queryFn: tvAPI.videos,
             staleTime: Infinity,
         })),
     });
@@ -51,9 +51,9 @@ export default function MovieTop20({ movieResults }: IProps) {
     ) as any;
 
     const credits = useSuspenseQueries({
-        queries: movieResults!.map((data) => ({
-            queryKey: ["movieTop20Credits", data.id],
-            queryFn: movieAPI.credits,
+        queries: tvResults!.map((data) => ({
+            queryKey: ["TVTop20Credits", data.id],
+            queryFn: tvAPI.credits,
             staleTime: Infinity,
         })),
     });
@@ -62,9 +62,9 @@ export default function MovieTop20({ movieResults }: IProps) {
     ) as any;
 
     const images = useSuspenseQueries({
-        queries: movieResults!.map((data) => ({
-            queryKey: [`movieTop20Images`, data.id],
-            queryFn: movieAPI.images,
+        queries: tvResults!.map((data) => ({
+            queryKey: [`TVTop20Images`, data.id],
+            queryFn: tvAPI.images,
             staleTime: Infinity,
         })),
     });
@@ -155,7 +155,7 @@ export default function MovieTop20({ movieResults }: IProps) {
                 onClick={onRightClick}
             />
             <Text fontWeight="bold" fontSize="20px" mb="30px" ml="25px">
-                이번 주 인기 영화 TOP 20
+                이번 주 인기 TV쇼 TOP 20
             </Text>
 
             <AnimatePresence
@@ -175,27 +175,25 @@ export default function MovieTop20({ movieResults }: IProps) {
                         duration: 0.7,
                     }}
                 >
-                    {movieResults
-                        .slice(startIndex, endIndex)
-                        .map((movie, index) => (
-                            <RankPoster
-                                key={index + startIndex}
-                                category="movies"
-                                title={movie.title}
-                                rank={index + startIndex + 1}
-                                poster={imagePathGenerator(
-                                    movie.poster_path || movie.backdrop_path,
-                                    "300"
-                                )}
-                                newest={index + startIndex < 3}
-                                monopoly={(index + startIndex + 1) % 5 === 0}
-                                basic={movieResults[index + startIndex]}
-                                detail={detailDatas[index + startIndex]}
-                                credit={creditDatas[index + startIndex]}
-                                video={videoDatas[index + startIndex]}
-                                logo={logoDatas[index + startIndex]}
-                            />
-                        ))}
+                    {tvResults.slice(startIndex, endIndex).map((tv, index) => (
+                        <RankPoster
+                            category="tv"
+                            key={index + startIndex}
+                            title={tv.name}
+                            rank={index + startIndex + 1}
+                            poster={imagePathGenerator(
+                                tv.poster_path || tv.backdrop_path,
+                                "300"
+                            )}
+                            newest={index + startIndex < 3}
+                            monopoly={(index + startIndex + 1) % 5 === 0}
+                            basic={tvResults[index + startIndex]}
+                            detail={detailDatas[index + startIndex]}
+                            credit={creditDatas[index + startIndex]}
+                            video={videoDatas[index + startIndex]}
+                            logo={logoDatas[index + startIndex]}
+                        />
+                    ))}
                 </Frames>
             </AnimatePresence>
         </Box>
