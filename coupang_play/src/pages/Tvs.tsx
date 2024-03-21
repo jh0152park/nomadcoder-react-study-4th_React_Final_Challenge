@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet";
 import MainSkeleton from "../components/home/skeleton/MainSkeleton";
 import TVBanner from "../components/banner/TVBanner";
 import GenreCategories from "../components/genre/GenreCategories";
+import OneLineSkeleton from "../components/home/skeleton/OneLineSkeleton";
+import TVTop20 from "../components/top20/TVTop20";
 
 function Tvs() {
     const entireDatas = useOutletContext<IEntireDatas>();
@@ -20,6 +22,10 @@ function Tvs() {
             </Suspense>
 
             <GenreCategories category="tv" />
+
+            <Suspense fallback={<OneLineSkeleton />}>
+                <TVTop20 tvResults={entireDatas?.tPopular} />
+            </Suspense>
         </>
     );
 }

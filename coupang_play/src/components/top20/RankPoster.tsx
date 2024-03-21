@@ -22,6 +22,7 @@ interface IProps {
     credit: any;
     video: any;
     logo: any;
+    category: "movies" | "tv";
 }
 
 export default function RankPoster({
@@ -35,6 +36,7 @@ export default function RankPoster({
     credit,
     video,
     logo,
+    category,
 }: IProps) {
     const navigate = useNavigate();
     const setBasic = useSetRecoilState(BasicInformation);
@@ -49,7 +51,7 @@ export default function RankPoster({
         setCredit(credit);
         setVideo(video);
         setLogo(logo);
-        navigate(`/home/movies/${title}`);
+        navigate(`/home/${category}/${title}`);
     }
 
     return (
