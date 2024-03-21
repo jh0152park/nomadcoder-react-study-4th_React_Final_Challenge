@@ -7,6 +7,7 @@ import { IEntireDatas } from "./HomeLayout";
 import MovieBanner from "../components/banner/MovieBanner";
 import GenreCategories from "../components/genre/GenreCategories";
 import MovieTop20 from "../components/top20/MovieTop20";
+import MovieSlider from "../components/slider/MovieSlider";
 
 function Movies() {
     const entireDatas = useOutletContext<IEntireDatas>();
@@ -23,9 +24,20 @@ function Movies() {
             <Suspense fallback={<MainSkeleton />}>
                 <MovieBanner movieResults={entireDatas?.mNowPlaying} />
             </Suspense>
+
             <GenreCategories category="movie" />
+
             <MovieTop20 movieResults={entireDatas?.mPopular} />
-            <Box w="100%" h="200vh" />
+
+            <MovieSlider
+                title="리뷰 많은 영화"
+                movieResults={entireDatas?.mTopRated}
+            />
+
+            <MovieSlider
+                title="곧 찾아올 영화"
+                movieResults={entireDatas?.mUpComming}
+            />
         </>
     );
 }

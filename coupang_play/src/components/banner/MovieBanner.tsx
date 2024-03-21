@@ -121,7 +121,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
                 top={0}
                 bottom={0}
                 my="auto"
-                left="20px"
+                left="15px"
                 zIndex={99}
                 _hover={{
                     cursor: "pointer",
@@ -139,7 +139,7 @@ function MovieBanner({ movieResults }: IBannerProps) {
                 top={0}
                 bottom={0}
                 my="auto"
-                right="20px"
+                right="15px"
                 zIndex={99}
                 _hover={{
                     cursor: "pointer",

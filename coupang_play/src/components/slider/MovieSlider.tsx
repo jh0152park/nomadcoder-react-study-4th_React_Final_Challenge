@@ -1,20 +1,19 @@
-import { Box, Text, Icon } from "@chakra-ui/react";
-import { IMovieResult } from "../../global/apiResponse";
-
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
+import { IMovieResult } from "../../global/apiResponse";
+import { Box, Icon, Text, VStack } from "@chakra-ui/react";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { AnimatePresence } from "framer-motion";
 import { Frames } from "./style";
 import { SlideVariants } from "../../global/projectCommon";
-import RankPoster from "./RankPoster";
 import { imagePathGenerator } from "../../utils";
 
 interface IProps {
+    title: string;
     movieResults: IMovieResult[];
 }
 
-export default function MovieTop20({ movieResults }: IProps) {
-    const [endIndex, setEndIndex] = useState(7);
+export default function MovieSlider({ title, movieResults }: IProps) {
+    const [endIndex, setEndIndex] = useState(6);
     const [startIndex, setStartIndex] = useState(0);
 
     const [direction, setDirection] = useState(1);
@@ -25,16 +24,16 @@ export default function MovieTop20({ movieResults }: IProps) {
 
         switch (startIndex) {
             case 0:
-                setStartIndex(13);
-                setEndIndex(20);
+                setStartIndex(12);
+                setEndIndex(18);
                 break;
-            case 7:
+            case 6:
                 setStartIndex(0);
-                setEndIndex(7);
+                setEndIndex(6);
                 break;
-            case 13:
-                setStartIndex(7);
-                setEndIndex(14);
+            case 12:
+                setStartIndex(6);
+                setEndIndex(12);
                 break;
             default:
                 break;
@@ -48,16 +47,16 @@ export default function MovieTop20({ movieResults }: IProps) {
 
         switch (startIndex) {
             case 0:
-                setStartIndex(7);
-                setEndIndex(14);
+                setStartIndex(6);
+                setEndIndex(12);
                 break;
-            case 7:
-                setStartIndex(13);
-                setEndIndex(20);
+            case 6:
+                setStartIndex(12);
+                setEndIndex(18);
                 break;
-            case 13:
+            case 12:
                 setStartIndex(0);
-                setEndIndex(7);
+                setEndIndex(6);
                 break;
             default:
                 break;
@@ -67,7 +66,7 @@ export default function MovieTop20({ movieResults }: IProps) {
     }
 
     return (
-        <Box w="100%" h="250px" position="relative" px="25px" mb="20px">
+        <Box w="100%" h="270px" position="relative" px="25px" mb="20px">
             <Icon
                 as={IoIosArrowBack}
                 w="40px"
@@ -104,8 +103,8 @@ export default function MovieTop20({ movieResults }: IProps) {
                 transition="all 0.1s linear"
                 onClick={onRightClick}
             />
-            <Text fontWeight="bold" fontSize="20px" mb="30px" ml="25px">
-                이번 주 인기 영화 TOP 20
+            <Text fontWeight="bold" fontSize="20px" mb="15px" ml="25px">
+                {title}
             </Text>
 
             <AnimatePresence
@@ -128,16 +127,25 @@ export default function MovieTop20({ movieResults }: IProps) {
                     {movieResults
                         .slice(startIndex, endIndex)
                         .map((movie, index) => (
-                            <RankPoster
+                            <Box
                                 key={index}
-                                rank={index + startIndex + 1}
-                                poster={imagePathGenerator(
-                                    movie.poster_path || movie.backdrop_path,
+                                h="100%"
+                                borderRadius="5px"
+                                bgSize="cover"
+                                bgPosition="top center"
+                                bgImage={`url(${imagePathGenerator(
+                                    movie.backdrop_path || movie.poster_path,
                                     "original"
-                                )}
-                                newest={index + startIndex < 3}
-                                monopoly={(index + startIndex + 1) % 5 === 0}
-                            ></RankPoster>
+                                )})`}
+                                _hover={{
+                                    cursor: "pointer",
+                                    transform: "scale(1.2)",
+                                    top: "-15px",
+                                    zIndex: "99",
+                                }}
+                                position="relative"
+                                transition="all 0.2s linear"
+                            />
                         ))}
                 </Frames>
             </AnimatePresence>
