@@ -1,5 +1,9 @@
 import { Box, Text, Icon } from "@chakra-ui/react";
-import { IMovieResult } from "../../global/apiResponse";
+import {
+    IMovieDetailsResponse,
+    IMovieResult,
+    IVideoResult,
+} from "../../global/apiResponse";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
@@ -8,17 +12,43 @@ import { Frames } from "./style";
 import { SlideVariants } from "../../global/projectCommon";
 import RankPoster from "./RankPoster";
 import { imagePathGenerator } from "../../utils";
+import { useSuspenseQueries } from "@tanstack/react-query";
+import { MovieHandlerAPI } from "../../global/api";
 
 interface IProps {
     movieResults: IMovieResult[];
 }
 
 export default function MovieTop20({ movieResults }: IProps) {
+    const movieAPI = new MovieHandlerAPI();
+
     const [endIndex, setEndIndex] = useState(7);
     const [startIndex, setStartIndex] = useState(0);
 
     const [direction, setDirection] = useState(1);
     const [moving, setMoving] = useState(false);
+
+    const details = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: ["movieTop20Details", data.id],
+            queryFn: movieAPI.details,
+            staleTime: Infinity,
+        })),
+    });
+    const detailDatas: IMovieDetailsResponse[] = details.map(
+        (deail) => deail.data
+    ) as any;
+
+    const videos = useSuspenseQueries({
+        queries: movieResults!.map((data) => ({
+            queryKey: ["movieTop20Videos", data.id],
+            queryFn: movieAPI.videos,
+            staleTime: Infinity,
+        })),
+    });
+    const videoDatas: IVideoResult[] = videos.map(
+        (video) => video.data.results
+    ) as any;
 
     function onLeftClick() {
         if (moving) return;
@@ -137,7 +167,7 @@ export default function MovieTop20({ movieResults }: IProps) {
                                 )}
                                 newest={index + startIndex < 3}
                                 monopoly={(index + startIndex + 1) % 5 === 0}
-                            ></RankPoster>
+                            />
                         ))}
                 </Frames>
             </AnimatePresence>
