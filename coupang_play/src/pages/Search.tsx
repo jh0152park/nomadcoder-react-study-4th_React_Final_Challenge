@@ -6,6 +6,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { useState } from "react";
 import SearchInput from "../components/search/SearchInput";
 import ContentGrid from "../components/search/ContentGrid";
+import GenreGrid from "../components/search/GenreGrid";
 
 export default function Search() {
     const [searching, setSearching] = useState(false);
@@ -35,6 +36,7 @@ export default function Search() {
                     />
                 </Box>
                 <ContentGrid />
+                <GenreGrid />
             </VStack>
         </>
     );
