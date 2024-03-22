@@ -1,6 +1,6 @@
 import { Center, Text, useDisclosure } from "@chakra-ui/react";
-import RegisterModal from "./account/RegisterModal";
-import LoginModal from "./account/LoginModal";
+import RegisterModal from "./Account/RegisterModal";
+import LoginModal from "./Account/LoginModal";
 
 type TActions = "register" | "login";
 
