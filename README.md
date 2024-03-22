@@ -18,5 +18,7 @@ nomadcoder-react-study-4th_React_Final_Challenge
 # Images
 ![image](https://github.com/jh0152park/nomadcoder-react-study-4th_React_Final_Challenge/assets/118165975/07921524-a71d-493b-be07-b35c39820961)
 
+![image](https://github.com/jh0152park/nomadcoder-react-study-4th_React_Final_Challenge/assets/118165975/69850443-a2d2-40ca-8316-4f4fca0f01d2)
+
 ![image](https://github.com/jh0152park/nomadcoder-react-study-4th_React_Final_Challenge/assets/118165975/91f4b626-a77e-4e3a-b6d7-c351e7b2cfa9)
 
