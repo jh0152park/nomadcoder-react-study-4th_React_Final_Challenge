@@ -1,10 +1,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { multiSearch } from "../global/api";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { imagePathGenerator } from "../utils";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Text, VStack } from "@chakra-ui/react";
 
 export default function SearchResult() {
@@ -13,7 +13,6 @@ export default function SearchResult() {
         queryKey: ["search", keyword],
         queryFn: multiSearch,
     });
-    const navigate = useNavigate();
 
     const movies = data.results.filter(
         (result: any) => result.backdrop_path && result.media_type === "tv"
@@ -50,6 +49,7 @@ export default function SearchResult() {
         },
     };
 
+    /* eslint-disable */
     useEffect(() => {
         refetch();
     }, [keyword]);
