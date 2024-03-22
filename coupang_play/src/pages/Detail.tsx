@@ -35,15 +35,6 @@ export default function Detail() {
     let logoPath = "";
     let videoKey = "";
 
-    // console.log("Basic");
-    // console.log(basic);
-    // console.log("detail");
-    // console.log(detail);
-    // console.log("credit");
-    // console.log(credit);
-    // console.log("video");
-    // console.log(video);
-
     function actorsParser(): string {
         const temp = credit.cast.slice(0, 10).map((actor: any) => actor.name);
         const names = temp.join(", ");
@@ -106,7 +97,11 @@ export default function Detail() {
                 h="100vh"
                 bgSize="cover"
                 bgPosition="top center"
-                bgImage={`url(${imagePathGenerator(
+                bgImage={`linear-gradient(
+                    270deg,
+                    rgba(0, 0, 0, 0),
+                    rgba(0, 0, 0, 1)
+                ), url(${imagePathGenerator(
                     basic.backdrop_path || basic.poster_path,
                     "original"
                 )})`}
@@ -137,7 +132,9 @@ export default function Detail() {
                         </Text>
                     )}
                     <Summary
-                        runtime={detail.runtime}
+                        runtime={
+                            detail.runtime || detail.episode_run_time[0] || 30
+                        }
                         score={detail.vote_average}
                         genre={detail.genres[0].name || "영화"}
                     />

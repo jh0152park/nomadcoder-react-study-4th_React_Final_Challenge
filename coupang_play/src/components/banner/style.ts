@@ -69,5 +69,6 @@ export const BannerDetail = styled(motion.div)`
     background-color: #171717;
     border-radius: 10px;
     position: absolute;
+    overflow: hidden;
     box-sizing: border-box;
 `;
