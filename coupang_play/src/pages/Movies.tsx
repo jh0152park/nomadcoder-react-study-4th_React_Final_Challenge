@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import React, { Suspense } from "react";
 import { Helmet } from "react-helmet";
 import { useOutletContext } from "react-router-dom";

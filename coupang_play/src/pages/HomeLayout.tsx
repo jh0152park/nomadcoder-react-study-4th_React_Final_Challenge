@@ -39,41 +39,49 @@ export default function HomeLayout() {
     const movieAPI = new MovieHandlerAPI();
 
     // entire movies call
+    delay(300);
     const mNowPlaying = useSuspenseQuery<IMovieListsResponse>({
         queryKey: ["mNowPlaying", 1],
         queryFn: movieAPI.nowPlaying,
         staleTime: Infinity,
     });
+    delay(300);
     const mPopular = useSuspenseQuery<IMovieListsResponse>({
         queryKey: ["mPopular", 1],
         queryFn: movieAPI.popular,
         staleTime: Infinity,
     });
+    delay(300);
     const mTopRated = useSuspenseQuery<IMovieListsResponse>({
         queryKey: ["mTopRated", 1],
         queryFn: movieAPI.topRated,
         staleTime: Infinity,
     });
+    delay(300);
     const mUpComming = useSuspenseQuery<IMovieListsResponse>({
         queryKey: ["mUpComming", 1],
         queryFn: movieAPI.upComming,
         staleTime: Infinity,
     });
+    delay(300);
     const mExtra1 = useSuspenseQuery<IMovieListsResponse>({
         queryKey: ["mExtra1", 2],
         queryFn: movieAPI.popular,
         staleTime: Infinity,
     });
+    delay(300);
     const mExtra2 = useSuspenseQuery<IMovieListsResponse>({
         queryKey: ["mExtra2", 3],
         queryFn: movieAPI.popular,
         staleTime: Infinity,
     });
+    delay(300);
     const mExtra3 = useSuspenseQuery<IMovieListsResponse>({
         queryKey: ["mExtra3", 2],
         queryFn: movieAPI.topRated,
         staleTime: Infinity,
     });
+    delay(300);
     const mExtra4 = useSuspenseQuery<IMovieListsResponse>({
         queryKey: ["mExtra4", 3],
         queryFn: movieAPI.topRated,
@@ -81,46 +89,58 @@ export default function HomeLayout() {
     });
 
     // entire tvs call
+    delay(300);
     const tAiringToday = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tAiringToday", 1],
         queryFn: tvAPI.airingToday,
         staleTime: Infinity,
     });
+    delay(300);
     const tOnTheAir = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tOnTheAir", 1],
         queryFn: tvAPI.onTheAir,
         staleTime: Infinity,
     });
+    delay(300);
     const tPopular = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tPopular", 1],
         queryFn: tvAPI.popular,
         staleTime: Infinity,
     });
+    delay(300);
     const tTopRated = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tTopRated", 1],
         queryFn: tvAPI.topRated,
         staleTime: Infinity,
     });
+    delay(300);
     const tExtra1 = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tExtra1", 2],
         queryFn: tvAPI.popular,
         staleTime: Infinity,
     });
+    delay(300);
     const tExtra2 = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tExtra2", 3],
         queryFn: tvAPI.popular,
         staleTime: Infinity,
     });
+    delay(300);
     const tExtra3 = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tExtra3", 2],
         queryFn: tvAPI.topRated,
         staleTime: Infinity,
     });
+    delay(300);
     const tExtra4 = useSuspenseQuery<ITVListsResponse>({
         queryKey: ["tExtra4", 3],
         queryFn: tvAPI.topRated,
         staleTime: Infinity,
     });
+
+    async function delay(d: number) {
+        await new Promise((resolve) => setTimeout(resolve, d));
+    }
 
     const entireDatas = {
         mNowPlaying: mNowPlaying.data.results,
