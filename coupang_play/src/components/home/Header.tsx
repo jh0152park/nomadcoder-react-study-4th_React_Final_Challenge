@@ -39,7 +39,7 @@ export default function Header() {
             h="70px"
             px="48px"
             top={0}
-            zIndex={99}
+            zIndex={100}
             position="fixed"
             bg={y > 200 ? "rgba(0, 0, 0, 1)" : "rgba(0, 0, 0, 0)"}
             transition="all 0.4s linear"

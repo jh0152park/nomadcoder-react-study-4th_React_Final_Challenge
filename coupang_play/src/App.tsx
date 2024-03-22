@@ -48,6 +48,10 @@ const router = createBrowserRouter([
                 element: <Tvs />,
             },
             {
+                path: "tv/:title",
+                element: <Detail />,
+            },
+            {
                 path: "live",
                 element: <NotSupport />,
             },
