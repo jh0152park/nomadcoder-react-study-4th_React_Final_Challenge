@@ -14,11 +14,7 @@ import {
     Overlay,
     PlayButton,
 } from "./style";
-import {
-    IMovieDetailsResponse,
-    IMovieResult,
-    IVideoResult,
-} from "../../global/apiResponse";
+import { IMovieDetailsResponse, IMovieResult } from "../../global/apiResponse";
 
 import Summary from "./Summary";
 import React from "react";

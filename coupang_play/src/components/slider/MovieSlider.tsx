@@ -1,12 +1,11 @@
 import { useState } from "react";
 import {
-    IImageResponse,
     IMovieDetailsResponse,
     IMovieImagesResponse,
     IMovieResult,
     IVideoResult,
 } from "../../global/apiResponse";
-import { Box, Icon, Text, VStack } from "@chakra-ui/react";
+import { Box, Icon, Text } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { AnimatePresence } from "framer-motion";
 import { Frames } from "./style";
@@ -18,7 +17,7 @@ import {
     SlideVariants,
     VideoInformation,
 } from "../../global/projectCommon";
-import { backdropParser, imagePathGenerator } from "../../utils";
+import { backdropParser } from "../../utils";
 import { MovieHandlerAPI } from "../../global/api";
 import { useSuspenseQueries } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";

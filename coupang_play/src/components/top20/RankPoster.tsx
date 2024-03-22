@@ -1,4 +1,4 @@
-import { Box, Center, HStack, Image } from "@chakra-ui/react";
+import { Box, HStack } from "@chakra-ui/react";
 import MonopolyBadge from "./MonoplyBadge";
 import NewestBadge from "./NewestBadge";
 import { useNavigate } from "react-router-dom";

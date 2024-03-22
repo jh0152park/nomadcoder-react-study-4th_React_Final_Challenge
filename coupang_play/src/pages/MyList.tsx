@@ -8,8 +8,6 @@ import { Suspense } from "react";
 import OneLineSkeleton from "../components/home/skeleton/OneLineSkeleton";
 import MovieSlider from "../components/slider/MovieSlider";
 import TVSlider from "../components/slider/TVSlider";
-import Header from "../components/home/Header";
-import Footer from "./common/Footer";
 
 export default function MyList() {
     const movieAPI = new MovieHandlerAPI();

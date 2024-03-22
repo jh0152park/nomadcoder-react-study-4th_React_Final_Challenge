@@ -1,13 +1,11 @@
 import { useState } from "react";
 import {
-    IImageResponse,
     IMovieDetailsResponse,
     IMovieImagesResponse,
-    IMovieResult,
     ITVResult,
     IVideoResult,
 } from "../../global/apiResponse";
-import { Box, Icon, Text, useToast } from "@chakra-ui/react";
+import { Box, Icon, Text } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { AnimatePresence } from "framer-motion";
 import { Frames } from "./style";
@@ -19,8 +17,8 @@ import {
     SlideVariants,
     VideoInformation,
 } from "../../global/projectCommon";
-import { backdropParser, imagePathGenerator } from "../../utils";
-import { MovieHandlerAPI, TVHandlerAPI } from "../../global/api";
+import { backdropParser } from "../../utils";
+import { TVHandlerAPI } from "../../global/api";
 import { useSuspenseQueries } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -31,7 +29,6 @@ interface IProps {
 }
 
 export default function TVSlider({ title, tvResults }: IProps) {
-    const toast = useToast();
     const navigate = useNavigate();
     const tvAPI = new TVHandlerAPI();
 
