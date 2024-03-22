@@ -60,12 +60,12 @@ function Movies() {
                     movieResults={entireDatas?.mExtra3}
                 />
             </Suspense>
-            <Suspense fallback={<OneLineSkeleton />}>
+            {/* <Suspense fallback={<OneLineSkeleton />}>
                 <MovieSlider
                     title="내가 즐겨 본 장르"
                     movieResults={entireDatas?.mExtra4}
                 />
-            </Suspense>
+            </Suspense> */}
         </>
     );
 }

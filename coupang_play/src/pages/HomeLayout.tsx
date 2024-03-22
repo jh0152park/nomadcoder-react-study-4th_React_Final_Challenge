@@ -19,7 +19,7 @@ export interface IEntireDatas {
     mExtra1: IMovieResult[];
     mExtra2: IMovieResult[];
     mExtra3: IMovieResult[];
-    mExtra4: IMovieResult[];
+    // mExtra4: IMovieResult[];
     tAiringToday: ITVResult[];
     tOnTheAir: ITVResult[];
     tPopular: ITVResult[];
@@ -27,7 +27,7 @@ export interface IEntireDatas {
     tExtra1: ITVResult[];
     tExtra2: ITVResult[];
     tExtra3: ITVResult[];
-    tExtra4: ITVResult[];
+    // tExtra4: ITVResult[];
 }
 
 export default function HomeLayout() {
@@ -81,12 +81,12 @@ export default function HomeLayout() {
         queryFn: movieAPI.topRated,
         staleTime: Infinity,
     });
-    delay(300);
-    const mExtra4 = useSuspenseQuery<IMovieListsResponse>({
-        queryKey: ["mExtra4", 3],
-        queryFn: movieAPI.topRated,
-        staleTime: Infinity,
-    });
+    // delay(300);
+    // const mExtra4 = useSuspenseQuery<IMovieListsResponse>({
+    //     queryKey: ["mExtra4", 3],
+    //     queryFn: movieAPI.topRated,
+    //     staleTime: Infinity,
+    // });
 
     // entire tvs call
     delay(300);
@@ -132,11 +132,11 @@ export default function HomeLayout() {
         staleTime: Infinity,
     });
     delay(300);
-    const tExtra4 = useSuspenseQuery<ITVListsResponse>({
-        queryKey: ["tExtra4", 3],
-        queryFn: tvAPI.topRated,
-        staleTime: Infinity,
-    });
+    // const tExtra4 = useSuspenseQuery<ITVListsResponse>({
+    //     queryKey: ["tExtra4", 3],
+    //     queryFn: tvAPI.topRated,
+    //     staleTime: Infinity,
+    // });
 
     async function delay(d: number) {
         await new Promise((resolve) => setTimeout(resolve, d));
@@ -150,7 +150,7 @@ export default function HomeLayout() {
         mExtra1: mExtra1.data.results,
         mExtra2: mExtra2.data.results,
         mExtra3: mExtra3.data.results,
-        mExtra4: mExtra4.data.results,
+        // mExtra4: mExtra4.data.results,
         tAiringToday: tAiringToday.data.results,
         tOnTheAir: tOnTheAir.data.results,
         tPopular: tPopular.data.results,
@@ -158,7 +158,7 @@ export default function HomeLayout() {
         tExtra1: tExtra1.data.results,
         tExtra2: tExtra2.data.results,
         tExtra3: tExtra3.data.results,
-        tExtra4: tExtra4.data.results,
+        // tExtra4: tExtra4.data.results,
     };
 
     /* eslint-disable */
