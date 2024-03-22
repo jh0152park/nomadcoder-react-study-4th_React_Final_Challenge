@@ -7,7 +7,7 @@ import {
     ITVResult,
     IVideoResult,
 } from "../../global/apiResponse";
-import { Box, Icon, Text } from "@chakra-ui/react";
+import { Box, Icon, Text, useToast } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { AnimatePresence } from "framer-motion";
 import { Frames } from "./style";
@@ -31,6 +31,7 @@ interface IProps {
 }
 
 export default function TVSlider({ title, tvResults }: IProps) {
+    const toast = useToast();
     const navigate = useNavigate();
     const tvAPI = new TVHandlerAPI();
 
