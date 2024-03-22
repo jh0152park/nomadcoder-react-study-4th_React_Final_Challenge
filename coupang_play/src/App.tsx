@@ -10,6 +10,7 @@ import NotSupport from "./pages/NotSuppot";
 import Detail from "./pages/Detail";
 import Tvs from "./pages/Tvs";
 import MyList from "./pages/MyList";
+import Search from "./pages/Search";
 
 const router = createBrowserRouter([
     {
@@ -73,6 +74,11 @@ const router = createBrowserRouter([
                 element: <NotSupport />,
             },
         ],
+    },
+    {
+        path: "/search",
+        errorElement: <NotFound />,
+        element: <Search />,
     },
 ]);
 

@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar, HStack, Icon, Image } from "@chakra-ui/react";
@@ -6,6 +6,7 @@ import { Avatar, HStack, Icon, Image } from "@chakra-ui/react";
 import {
     CATEGORIES,
     CATEGORIES_LINK,
+    CURRENT_CATEGORY,
     USER_NAME,
 } from "../../global/projectCommon";
 import CategoryButton from "./CategoryButton";
@@ -21,9 +22,15 @@ export default function Header() {
     const navigate = useNavigate();
     const userName = useRecoilValue(USER_NAME);
     const [avatarHover, setAvatarHover] = useState(false);
+    const setCurrnetCategory = useSetRecoilState(CURRENT_CATEGORY);
 
     function onScroll() {
         setY(window.scrollY);
+    }
+
+    function onSearchClick() {
+        navigate("/search");
+        setCurrnetCategory("");
     }
 
     useEffect(() => {
@@ -70,6 +77,7 @@ export default function Header() {
                     as={FaMagnifyingGlass}
                     _hover={{ cursor: "pointer", transform: "scale(1.2)" }}
                     transition="all 0.2s linear"
+                    onClick={onSearchClick}
                 />
 
                 <HStack>
