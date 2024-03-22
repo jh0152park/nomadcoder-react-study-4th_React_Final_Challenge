@@ -63,12 +63,12 @@ function Tvs() {
                 />
             </Suspense>
 
-            <Suspense fallback={<OneLineSkeleton />}>
+            {/* <Suspense fallback={<OneLineSkeleton />}>
                 <TVSlider
                     title="내가 즐겨 본 장르의 TV쇼"
                     tvResults={entireDatas?.tExtra4}
                 />
-            </Suspense>
+            </Suspense> */}
         </>
     );
 }
