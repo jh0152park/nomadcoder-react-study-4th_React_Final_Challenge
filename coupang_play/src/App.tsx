@@ -13,6 +13,9 @@ import MyList from "./pages/MyList";
 import Search from "./pages/Search";
 import MyListLayout from "./pages/MyListLayout";
 import MyListSkeleton from "./components/mylist/MyListSkeleton";
+import SearchLayout from "./pages/SearchLayout";
+import SearchResult from "./pages/SearchResult";
+import SearchSkeleton from "./components/search/SearchSkeleton";
 
 const router = createBrowserRouter([
     {
@@ -92,7 +95,21 @@ const router = createBrowserRouter([
     {
         path: "/search",
         errorElement: <NotFound />,
-        element: <Search />,
+        element: <SearchLayout />,
+        children: [
+            {
+                path: "",
+                element: <Search />,
+            },
+            {
+                path: ":keyword",
+                element: (
+                    <Suspense fallback={<SearchSkeleton />}>
+                        <SearchResult />
+                    </Suspense>
+                ),
+            },
+        ],
     },
 ]);
 

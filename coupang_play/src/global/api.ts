@@ -115,7 +115,6 @@ export class MovieHandlerAPI {
             },
         };
 
-        console.log(queryKey);
         await new Promise((resolve) => setTimeout(resolve, 1600));
         return fetch(
             `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
@@ -265,7 +264,6 @@ export class TVHandlerAPI {
             },
         };
 
-        console.log(queryKey);
         await new Promise((resolve) => setTimeout(resolve, 1600));
         return fetch(
             `https://api.themoviedb.org/3/tv/${id}?language=en-US`,
@@ -326,4 +324,22 @@ export class TVHandlerAPI {
             options
         ).then((response) => response.json());
     }
+}
+
+export async function multiSearch({ queryKey }: QueryFunctionContext) {
+    const [_, keyword] = queryKey;
+
+    const options = {
+        method: "GET",
+        headers: {
+            accept: "application/json",
+            Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzlhNzA4ODRhMTY2ZDQ2ODE0ZTYwNTMwMTU2OGQyZCIsInN1YiI6IjY0YmEyMDIwMzAwOWFhMDBlMjY0Y2VhZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eHILwGMMFNYioeUQaVUSgf_kU4PRKZP99iDQOHXQRpI",
+        },
+    };
+
+    return fetch(
+        `https://api.themoviedb.org/3/search/multi?query=${keyword}&include_adult=true&language=en-US&page=1`,
+        options
+    ).then((response) => response.json());
 }
