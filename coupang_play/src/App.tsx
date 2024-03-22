@@ -9,6 +9,7 @@ import HomeSkeleton from "./components/home/HomeSkeleton";
 import NotSupport from "./pages/NotSuppot";
 import Detail from "./pages/Detail";
 import Tvs from "./pages/Tvs";
+import MyList from "./pages/MyList";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path: "tv/:title",
                 element: <Detail />,
+            },
+            {
+                path: "mylist",
+                element: <MyList />,
             },
             {
                 path: "live",
