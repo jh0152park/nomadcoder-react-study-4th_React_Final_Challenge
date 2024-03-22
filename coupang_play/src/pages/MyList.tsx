@@ -8,6 +8,8 @@ import { Suspense } from "react";
 import OneLineSkeleton from "../components/home/skeleton/OneLineSkeleton";
 import MovieSlider from "../components/slider/MovieSlider";
 import TVSlider from "../components/slider/TVSlider";
+import Header from "../components/home/Header";
+import Footer from "./common/Footer";
 
 export default function MyList() {
     const movieAPI = new MovieHandlerAPI();
@@ -39,6 +41,7 @@ export default function MyList() {
             <Helmet>
                 <title>쿠팡플레이 - 찜한 콘텐츠</title>
             </Helmet>
+
             <VStack w="100%" h="750px" pt="150px">
                 <Suspense fallback={<OneLineSkeleton />}>
                     <MovieSlider

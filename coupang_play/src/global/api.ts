@@ -43,6 +43,7 @@ export class MovieHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`,
             options
@@ -60,6 +61,7 @@ export class MovieHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`,
             options
@@ -77,6 +79,7 @@ export class MovieHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`,
             options
@@ -94,6 +97,7 @@ export class MovieHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`,
             options
@@ -111,6 +115,8 @@ export class MovieHandlerAPI {
             },
         };
 
+        console.log(queryKey);
+        await new Promise((resolve) => setTimeout(resolve, 1600));
         return fetch(
             `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
             options
@@ -129,6 +135,7 @@ export class MovieHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
             options
@@ -147,6 +154,7 @@ export class MovieHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
             options
@@ -164,6 +172,7 @@ export class MovieHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/movie/${id}/images`,
             options
@@ -184,6 +193,7 @@ export class TVHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${page}`,
             options
@@ -201,6 +211,7 @@ export class TVHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=${page}`,
             options
@@ -218,6 +229,7 @@ export class TVHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`,
             options
@@ -235,6 +247,7 @@ export class TVHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`,
             options
@@ -252,6 +265,8 @@ export class TVHandlerAPI {
             },
         };
 
+        console.log(queryKey);
+        await new Promise((resolve) => setTimeout(resolve, 1600));
         return fetch(
             `https://api.themoviedb.org/3/tv/${id}?language=en-US`,
             options
@@ -269,6 +284,7 @@ export class TVHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/tv/${id}/credits?language=en-US`,
             options
@@ -286,6 +302,7 @@ export class TVHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`,
             options
@@ -303,6 +320,7 @@ export class TVHandlerAPI {
             },
         };
 
+        await new Promise((resolve) => setTimeout(resolve, 1200));
         return fetch(
             `https://api.themoviedb.org/3/tv/${id}/images`,
             options

@@ -191,28 +191,34 @@ function MovieBanner({ movieResults }: IBannerProps) {
                 onClick={onRightClick}
             />
 
-            <HStack
-                w="100%"
-                h="50px"
-                position="absolute"
-                zIndex="99"
-                bottom="0"
-                justifyContent="center"
-                alignItems="center"
-                spacing="20px"
-            >
-                {[...new Array(movieResults.length)].map((dot, i) => (
-                    <Box
-                        w="8px"
-                        h="8px"
-                        key={i}
-                        borderRadius="50%"
-                        bg={startIndex === i ? "whitesmoke" : "rgb(57, 57, 57)"}
-                        _hover={{ cursor: "pointer" }}
-                        onClick={() => onDotClick(i)}
-                    />
-                ))}
-            </HStack>
+            {!moving && (
+                <HStack
+                    w="100%"
+                    h="50px"
+                    position="absolute"
+                    zIndex="99"
+                    bottom="0"
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing="20px"
+                >
+                    {[...new Array(movieResults.length)].map((dot, i) => (
+                        <Box
+                            w="8px"
+                            h="8px"
+                            key={i}
+                            borderRadius="50%"
+                            bg={
+                                startIndex === i
+                                    ? "whitesmoke"
+                                    : "rgb(57, 57, 57)"
+                            }
+                            _hover={{ cursor: "pointer" }}
+                            onClick={() => onDotClick(i)}
+                        />
+                    ))}
+                </HStack>
+            )}
 
             <AnimatePresence
                 initial={false}

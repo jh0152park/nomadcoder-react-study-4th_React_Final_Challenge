@@ -11,6 +11,8 @@ import Detail from "./pages/Detail";
 import Tvs from "./pages/Tvs";
 import MyList from "./pages/MyList";
 import Search from "./pages/Search";
+import MyListLayout from "./pages/MyListLayout";
+import MyListSkeleton from "./components/mylist/MyListSkeleton";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +23,21 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <Login />,
+            },
+        ],
+    },
+    {
+        path: "/home/mylist",
+        errorElement: <NotFound />,
+        element: (
+            <Suspense fallback={<MyListSkeleton />}>
+                <MyListLayout />
+            </Suspense>
+        ),
+        children: [
+            {
+                path: "",
+                element: <MyList />,
             },
         ],
     },
@@ -53,10 +70,7 @@ const router = createBrowserRouter([
                 path: "tv/:title",
                 element: <Detail />,
             },
-            {
-                path: "mylist",
-                element: <MyList />,
-            },
+
             {
                 path: "live",
                 element: <NotSupport />,

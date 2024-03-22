@@ -137,8 +137,6 @@ export default function MovieSlider({ title, movieResults }: IProps) {
         setMoving(true);
     }
 
-    console.log(imageDatas);
-
     function onMovieClick(title: string, index: number) {
         setBasic(movieResults[index]);
         setDetail(detailDatas[index]);
