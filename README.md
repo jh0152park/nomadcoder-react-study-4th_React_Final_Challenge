@@ -15,9 +15,6 @@ nomadcoder-react-study-4th_React_Final_Challenge
 
 ## https://62a90b16.nomadcoder-react-study-4th-react-final-challenge.pages.dev/
 
-# 회고록
-
-## https://velog.io/@jh0152park/Nomadcoder-React-Study-4%EA%B8%B0-React-%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%ED%9A%8C%EA%B3%A0
 
 # Images
 ![image](https://github.com/jh0152park/nomadcoder-react-study-4th_React_Final_Challenge/assets/118165975/07921524-a71d-493b-be07-b35c39820961)
