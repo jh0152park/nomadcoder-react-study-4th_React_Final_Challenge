@@ -13,7 +13,7 @@ nomadcoder-react-study-4th_React_Final_Challenge
 
 # Deployment
 
-## https://62a90b16.nomadcoder-react-study-4th-react-final-challenge.pages.dev/
+## URL: https://62a90b16.nomadcoder-react-study-4th-react-final-challenge.pages.dev/
 
 
 # Images
